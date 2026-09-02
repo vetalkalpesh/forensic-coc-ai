@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cases — Forensic CoC</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div id="app" style="display:flex;width:100%">
+        <div class="main">
+            <div class="topbar">
+                <div>
+                    <div class="topbar-title">Case Management</div>
+                    <div class="topbar-sub">ALL CRIMINAL CASES</div>
+                </div>
+                <div class="topbar-right"><button class="btn btn-primary req-senior" onclick="openModal('addCaseModal')">+ New
+                        Case</button></div>
+            </div>
+            <div class="content">
+                <div class="search-bar"><span>🔍</span><input type="text" id="caseSearch"
+                        placeholder="Search FIR, type, officer, station..."></div>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table id="caseTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>FIR Number</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Officer</th>
+                                    <th>Station</th>
+                                    <th>Date Filed</th>
+                                    <th>Evidence</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="caseBody">
+                                <tr>
+                                    <td colspan="9" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="addCaseModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">Register New Case</span><button class="modal-close"
+                    onclick="closeModal('addCaseModal')">×</button></div>
+            <div class="modal-body">
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">FIR Number *</label><input class="form-control"
+                            id="firNo" placeholder="FIR/2024/PUN/006"></div>
+                    <div class="form-group"><label class="form-label">Date Filed *</label><input class="form-control"
+                            id="dateFiled" type="date"></div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Case Type *</label><select class="form-control"
+                            id="caseType"></select></div>
+                    <div class="form-group"><label class="form-label">Status *</label><select class="form-control"
+                            id="caseStatus"></select></div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Police Station *</label><select
+                            class="form-control" id="station"></select></div>
+                    <div class="form-group"><label class="form-label">Investigating Officer *</label><select
+                            class="form-control" id="officer"></select></div>
+                </div>
+                <div class="form-group"><label class="form-label">Court</label><select class="form-control"
+                        id="court"></select></div>
+                <div class="form-group"><label class="form-label">Description</label><textarea class="form-control"
+                        id="caseDesc" rows="3"></textarea></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-outline"
+                    onclick="closeModal('addCaseModal')">Cancel</button><button class="btn btn-primary"
+                    onclick="addCase()">Register</button></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal" style="width:700px">
+            <div class="modal-header"><span class="modal-title" id="detailTitle">Case Details</span><button
+                    class="modal-close" onclick="closeModal('detailModal')">×</button></div>
+            <div class="modal-body" id="detailBody">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+    <script>
+        async function load() {
+            const cases = await get('/cases');
+            document.getElementById('caseBody').innerHTML = cases.map(c => `<tr>
+        <td><span class="mono">#${c.case_id}</span></td>
+        <td><span class="mono">${c.fir_number}</span></td>
+        <td>${c.type_name}</td><td>${statusBadge(c.status)}</td>
+        <td>${c.officer}</td><td>${c.station}</td>
+        <td>${fmtDate(c.date_filed)}</td>
+        <td><span class="badge badge-gray">${c.evidence_count}</span></td>
+        <td><button class="btn btn-outline btn-sm" onclick="viewCase(${c.case_id})">View</button></td>
+    </tr>`).join('') || '<tr><td colspan="9" class="empty">No cases</td></tr>';
+            searchTable('caseSearch', 'caseTable');
+        }
+        async function loadDD() {
+            const [t, s, ps, o, c] = await Promise.all([get('/lookup/case-types'), get('/lookup/case-status'), get('/lookup/police-stations'), get('/lookup/officers'), get('/lookup/courts')]);
+            populateSelect('caseType', t, 'type_id', 'type_name');
+            populateSelect('caseStatus', s, 'status_id', 'label');
+            populateSelect('station', ps, 'station_id', 'name');
+            populateSelect('officer', o, 'officer_id', 'full_name');
+            populateSelect('court', c, 'court_id', 'court_name', 'No court yet');
+            document.getElementById('dateFiled').value = new Date().toISOString().slice(0, 10);
+        }
+        async function addCase() {
+            const r = await post('/cases', { fir_number: document.getElementById('firNo').value, date_filed: document.getElementById('dateFiled').value, case_type_id: document.getElementById('caseType').value, status_id: document.getElementById('caseStatus').value, police_station_id: document.getElementById('station').value, investigating_officer_id: document.getElementById('officer').value, court_id: document.getElementById('court').value || null, description: document.getElementById('caseDesc').value });
+            if (r.success) { closeModal('addCaseModal'); toast('Case registered!', 'success'); load(); }
+            else toast(r.error || 'Error', 'danger');
+        }
+        async function viewCase(id) {
+            openModal('detailModal');
+            const d = await get(`/cases/${id}`);
+            const c = d.case;
+            document.getElementById('detailTitle').textContent = `Case: ${c.fir_number}`;
+            document.getElementById('detailBody').innerHTML = `
+        <div class="form-grid-2" style="margin-bottom:16px">
+            <div><div class="form-label">FIR Number</div><span class="mono">${c.fir_number}</span></div>
+            <div><div class="form-label">Status</div>${statusBadge(c.status_label)}</div>
+            <div><div class="form-label">Case Type</div>${c.type_name}</div>
+            <div><div class="form-label">Date Filed</div>${fmtDate(c.date_filed)}</div>
+            <div><div class="form-label">Officer</div>${c.officer_name}</div>
+            <div><div class="form-label">Court</div>${c.court_name || 'Not assigned'}</div>
+        </div>
+        <div style="margin-bottom:16px"><div class="form-label">Description</div><div style="color:var(--text2)">${c.description || '—'}</div></div>
+        <div class="divider"></div>
+        <div class="card-title">Evidence (${d.evidence.length})</div>
+        ${d.evidence.map(e => `<div style="padding:8px 12px;background:var(--bg3);border-radius:6px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center"><span>${e.description}</span>${statusBadge(e.current_status)}</div>`).join('') || '<div class="empty">No evidence</div>'}
+        <div class="divider"></div>
+        <div class="card-title">Hearings (${d.hearings.length})</div>
+        ${d.hearings.map(h => `<div style="padding:8px 12px;background:var(--bg3);border-radius:6px;margin-bottom:6px"><div class="flex-between"><span class="mono">${fmtDate(h.hearing_date)}</span><span style="font-size:12px;color:var(--text3)">${h.judge_name}</span></div><div style="color:var(--text2);font-size:13px;margin-top:4px">${h.hearing_purpose}</div>${h.outcome ? `<div style="color:var(--greenl);font-size:12px;margin-top:4px">✓ ${h.outcome}</div>` : ''}</div>`).join('') || '<div class="empty">No hearings</div>'}
+    `;
+        }
+        load(); loadDD();
+    </script>
+</body>
+
+</html>

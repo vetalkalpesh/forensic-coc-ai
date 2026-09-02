@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evidence — Forensic CoC</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div id="app" style="display:flex;width:100%">
+        <div class="main">
+            <div class="topbar">
+                <div>
+                    <div class="topbar-title">Evidence Management</div>
+                    <div class="topbar-sub">REGISTER, TRACK & VERIFY ALL EVIDENCE</div>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn btn-outline" onclick="openModal('hashModal')">🔑 Verify Hash</button>
+                    <button class="btn btn-primary req-senior" onclick="openModal('addModal')">+ Register
+                        Evidence</button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="search-bar"><span>🔍</span><input type="text" id="evSearch"
+                        placeholder="Search by description, FIR, type, status..."></div>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table id="evTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>FIR</th>
+                                    <th>Status</th>
+                                    <th>Collected By</th>
+                                    <th>Date</th>
+                                    <th>Expiry</th>
+                                    <th>Media</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="evBody">
+                                <tr>
+                                    <td colspan="10" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Evidence Modal -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal" style="width:660px">
+            <div class="modal-header"><span class="modal-title">Register New Evidence</span><button class="modal-close"
+                    onclick="closeModal('addModal')">×</button></div>
+            <div class="modal-body">
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Case *</label><select class="form-control"
+                            id="evCase" onchange="loadScenes(this.value)"></select></div>
+                    <div class="form-group"><label class="form-label">Crime Scene *</label><select class="form-control"
+                            id="evScene"></select></div>
+                </div>
+                <div class="form-group"><label class="form-label">Description *</label><input class="form-control"
+                        id="evDesc" placeholder="Describe the evidence in full detail..."></div>
+                <div class="form-grid-3">
+                    <div class="form-group"><label class="form-label">Evidence Type *</label><select
+                            class="form-control" id="evType"></select></div>
+                    <div class="form-group"><label class="form-label">Collected By *</label><select class="form-control"
+                            id="evOfficer"></select></div>
+                    <div class="form-group"><label class="form-label">Storage Unit</label><select class="form-control"
+                            id="evUnit"></select></div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">SHA-256 Hash (Digital Evidence)</label><input
+                            class="form-control" id="evHash" placeholder="64-char hash or leave blank"></div>
+                    <div class="form-group"><label class="form-label">Expiry Date (Biological)</label><input
+                            class="form-control" id="evExpiry" type="date"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Upload Photo / Video *</label>
+                    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('evMedia').click()">
+                        <input type="file" id="evMedia" accept="image/*,video/*" onchange="previewMedia(this)">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Click to upload photo or video</div>
+                        <div class="upload-subtext">JPG, PNG, GIF, MP4, MOV supported</div>
+                    </div>
+                    <div class="upload-preview" id="uploadPreview"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="registerEvidence()">Register Evidence</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evidence Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal" style="width:720px">
+            <div class="modal-header"><span class="modal-title" id="detailTitle">Evidence Details</span><button
+                    class="modal-close" onclick="closeModal('detailModal')">×</button></div>
+            <div class="modal-body" id="detailBody">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Additional Media Modal -->
+    <div class="modal-overlay" id="uploadMoreModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">Upload Additional Media</span><button
+                    class="modal-close" onclick="closeModal('uploadMoreModal')">×</button></div>
+            <div class="modal-body">
+                <input type="hidden" id="umEvId">
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Event Type</label>
+                        <select class="form-control" id="umEventType">
+                            <option value="Collection">Collection</option>
+                            <option value="Transfer">Transfer</option>
+                            <option value="Tamper">Tamper</option>
+                            <option value="CourtSubmission">Court Submission</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="form-label">Officer</label><select class="form-control"
+                            id="umOfficer"></select></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Select File</label>
+                    <div class="upload-zone" onclick="document.getElementById('umFile').click()">
+                        <input type="file" id="umFile" accept="image/*,video/*" onchange="previewUploadMore(this)">
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">Click to select photo or video</div>
+                    </div>
+                    <div id="umPreview" class="upload-preview"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Notes</label><input class="form-control" id="umNotes"
+                        placeholder="Optional notes..."></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('uploadMoreModal')">Cancel</button>
+                <button class="btn btn-success" onclick="doUploadMore()">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hash Verify Modal -->
+    <div class="modal-overlay" id="hashModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">🔑 Verify SHA-256 Hash</span><button class="modal-close"
+                    onclick="closeModal('hashModal')">×</button></div>
+            <div class="modal-body">
+                <div class="alert-box info">Upload the digital file. The system will auto-calculate its SHA-256 hash and
+                    compare it against the securely stored hash.</div>
+                <div class="form-group"><label class="form-label">Evidence ID</label><input class="form-control"
+                        id="hashEvId" type="number" readonly></div>
+                <div class="form-group"><label class="form-label">Select File to Verify</label><input type="file"
+                        class="form-control" id="hashFile"></div>
+                <div id="hashResult"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('hashModal')">Close</button>
+                <button class="btn btn-primary" onclick="doVerifyHash()">Verify Hash</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+    <script>
+        async function loadEvidence() {
+            const items = await get('/evidence');
+            document.getElementById('evBody').innerHTML = items.map(e => `
+        <tr>
+            <td><span class="mono">E${String(e.evidence_id).padStart(3, '0')}</span></td>
+            <td style="max-width:200px">${e.description}</td>
+            <td><span class="badge badge-gray">${e.type_name}</span></td>
+            <td><span class="mono" style="font-size:11px">${e.fir_number}</span></td>
+            <td>${statusBadge(e.current_status)}</td>
+            <td>${e.collected_by}</td>
+            <td>${fmtDT(e.collection_datetime)}</td>
+            <td>${e.expiry_date ? `<span style="color:${isExpiring(e.expiry_date) ? 'var(--redl)' : 'var(--text2)'}">${fmtDate(e.expiry_date)}</span>` : '—'}</td>
+            <td><button class="btn btn-outline btn-sm req-senior" onclick="openUploadMore(${e.evidence_id})">📎 Add</button></td>
+            <td style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-outline btn-sm" onclick="viewEvidence(${e.evidence_id})">View</button>
+                ${e.hash_value ? `<button class="btn btn-outline btn-sm" onclick="quickHash(${e.evidence_id})">🔑</button>` : ''}
+            </td>
+        </tr>`).join('') || '<tr><td colspan="10" class="empty">No evidence registered</td></tr>';
+            searchTable('evSearch', 'evTable');
+        }
+
+        function isExpiring(d) { const diff = (new Date(d) - new Date()) / (1000 * 60 * 60 * 24); return diff >= 0 && diff <= 7; }
+
+        async function loadDropdowns() {
+            const [cases, types, officers, units] = await Promise.all([get('/lookup/cases-list'), get('/lookup/evidence-types'), get('/lookup/officers'), get('/lookup/storage-units')]);
+            populateSelect('evCase', cases, 'case_id', 'fir_number');
+            populateSelect('evType', types, 'type_id', 'type_name');
+            populateSelect('evOfficer', officers, 'officer_id', 'full_name');
+            populateSelect('evUnit', units, 'unit_id', 'unit_code', 'No storage (assign later)');
+        }
+
+        async function loadScenes(cid) {
+            if (!cid) return;
+            const s = await get(`/lookup/scenes/${cid}`);
+            populateSelect('evScene', s, 'scene_id', 'address');
+        }
+
+        function previewMedia(input) {
+            const file = input.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const isVid = file.type.startsWith('video');
+                document.getElementById('uploadPreview').innerHTML = isVid
+                    ? `<video controls style="max-width:100%;max-height:180px;border-radius:6px"><source src="${e.target.result}"></video>`
+                    : `<img src="${e.target.result}" style="max-width:100%;max-height:180px;border-radius:6px">`;
+                document.querySelector('#uploadZone .upload-text').textContent = `Selected: ${file.name}`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewUploadMore(input) {
+            const file = input.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const isVid = file.type.startsWith('video');
+                document.getElementById('umPreview').innerHTML = isVid
+                    ? `<video controls style="max-width:100%;max-height:180px;border-radius:6px"><source src="${e.target.result}"></video>`
+                    : `<img src="${e.target.result}" style="max-width:100%;max-height:180px;border-radius:6px">`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function registerEvidence() {
+            const f = new FormData();
+            f.append('case_id', document.getElementById('evCase').value);
+            f.append('scene_id', document.getElementById('evScene').value);
+            f.append('description', document.getElementById('evDesc').value);
+            f.append('type_id', document.getElementById('evType').value);
+            f.append('unit_id', document.getElementById('evUnit').value);
+            f.append('expiry_date', document.getElementById('evExpiry').value);
+            const file = document.getElementById('evMedia').files[0];
+            if (file) f.append('media', file);
+            const r = await postForm('/evidence', f);
+            if (r.success) { closeModal('addModal'); toast('Evidence registered!', 'success'); loadEvidence(); }
+            else toast(r.error || 'Error registering evidence', 'danger');
+        }
+
+        async function viewEvidence(eid) {
+            openModal('detailModal');
+            document.getElementById('detailBody').innerHTML = '<div class="loading">Loading...</div>';
+            const d = await get(`/evidence/${eid}`);
+            const e = d.evidence;
+            document.getElementById('detailTitle').textContent = `E${String(eid).padStart(3, '0')} — ${e.description}`;
+
+            // Build media grid with SHA-256 verification status
+            let mediaHtml = '<div class="alert-box info" style="margin-top:8px">📷 No photographic evidence available for this evidence item.</div>';
+            let mainPhoto = null;
+
+            if (d.media && d.media.length) {
+                mainPhoto = d.media.find(m => !m.is_video) || d.media[0];
+                mediaHtml = `<div class="media-grid">${d.media.map(m => `
+            <div class="media-item" onclick="openLightbox('${m.url}',${m.is_video},'${m.event_type} — ${fmtDT(m.taken_at)}')">
+                ${m.is_video
+                        ? `<video style="width:100%;height:120px;object-fit:cover"><source src="${m.url}"></video>
+                       <div class="media-label">🎬 ${m.event_type}<span class="media-type-badge">VIDEO</span></div>`
+                        : `<img src="${m.url}" alt="${m.event_type}" loading="lazy"
+                         onerror="this.src='http://127.0.0.1:5000/uploads/placeholder.png';this.style.background='var(--bg3)'">
+                       <div class="media-label">📸 ${m.event_type}</div>`}
+            </div>`).join('')}
+        </div>`;
+            }
+
+            // Cryptographic SHA-256 & Vision AI Section HTML
+            let photoIntegrityHtml = '';
+            if (mainPhoto && !mainPhoto.is_video) {
+                const isIntact = mainPhoto.integrity === 'INTACT';
+                const badgeColor = isIntact ? 'success' : (mainPhoto.integrity === 'COMPROMISED' ? 'danger' : 'warning');
+                const badgeText = isIntact ? '✓ SHA-256 VERIFIED' : (mainPhoto.integrity === 'COMPROMISED' ? '✖ HASH MISMATCH (COMPROMISED)' : '⚠ UNVERIFIED');
+                
+                photoIntegrityHtml = `
+            <div class="divider"></div>
+            <div class="card-title">Photographic Evidence & Cryptographic Integrity</div>
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:16px">
+                <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+                    <img src="${mainPhoto.url}" style="width:140px;height:110px;object-fit:cover;border-radius:6px;border:1px solid var(--border)">
+                    <div style="flex:1;min-width:240px">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                            <span class="badge badge-${badgeColor}">${badgeText}</span>
+                            <span class="mono" style="font-size:11px;color:var(--text2)">${mainPhoto.file_name}</span>
+                        </div>
+                        <div style="font-size:12px;margin-bottom:4px"><strong>Stored SHA-256:</strong> <span class="mono" style="font-size:11px;word-break:break-all">${mainPhoto.stored_hash || 'None'}</span></div>
+                        <div style="font-size:12px;margin-bottom:8px"><strong>Current Byte Hash:</strong> <span class="mono" style="font-size:11px;word-break:break-all">${mainPhoto.current_hash || 'Calculating...'}</span></div>
+                        <div style="display:flex;gap:8px">
+                            <button class="btn btn-outline btn-sm" onclick="checkImageIntegrity(${eid})">🔑 Verify Byte Integrity</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="visionAnalysisBox-${eid}" style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+                        <div style="color:var(--accent);font-weight:600">👁 Vision AI &amp; Visual-DB Consistency Check</div>
+                        <button id="visionBtn-${eid}"
+                            class="btn btn-outline btn-sm"
+                            style="font-size:11px;padding:4px 10px;"
+                            onclick="runVisionAnalysis(${eid})">
+                            🔍 Analyze Image with Vision AI
+                        </button>
+                    </div>
+                    <div id="visionResult-${eid}" style="color:var(--text2);font-size:12px">
+                        Vision AI cross-checks the photograph against authoritative database metadata.<br>
+                        <em>Click "Analyze Image" to run the analysis.</em>
+                    </div>
+                    <div style="font-size:10px;color:var(--text3);margin-top:6px;font-style:italic">
+                        ⚠ Vision AI provides probabilistic visual observations only. SHA-256 above is the authoritative cryptographic byte integrity check. These are separate and independent.
+                    </div>
+                </div>
+            </div>`;
+            } else {
+                photoIntegrityHtml = `
+            <div class="divider"></div>
+            <div class="card-title">Photographic Evidence & Integrity</div>
+            <div class="alert-box info" style="margin-bottom:16px">No photographic evidence available for this evidence item. Visual AI analysis cannot be performed.</div>`;
+            }
+
+            document.getElementById('detailBody').innerHTML = `
+        <div class="form-grid-2" style="margin-bottom:16px">
+            <div><div class="form-label">Type</div>${e.type_name}</div>
+            <div><div class="form-label">Status</div>${statusBadge(e.current_status)}</div>
+            <div><div class="form-label">Case FIR</div><span class="mono">${e.fir_number}</span></div>
+            <div><div class="form-label">Collected By</div>${e.collected_by_name}</div>
+            <div><div class="form-label">Collection Time</div>${fmtDT(e.collection_datetime)}</div>
+            <div><div class="form-label">Expiry Date</div>${e.expiry_date ? fmtDate(e.expiry_date) : '—'}</div>
+        </div>
+        ${e.hash_value ? `<div class="alert-box info" style="margin-bottom:16px"><strong>Digital SHA-256:</strong> <span class="mono" style="font-size:11px;word-break:break-all">${e.hash_value}</span></div>` : ''}
+
+        ${photoIntegrityHtml}
+
+        <div class="card-title">Uploaded Media Files (${(d.media || []).length})</div>
+        <div style="margin-bottom:16px">${mediaHtml}</div>
+
+        <div class="divider"></div>
+        <div class="card-title">Chain of Custody (${(d.custody || []).length} transfers)</div>
+        <div class="chain">${(d.custody || []).map((c, i) => `
+            <div class="chain-item">
+                <div class="chain-line">
+                    <div class="chain-dot"></div>
+                    ${i < d.custody.length - 1 ? '<div class="chain-dash"></div>' : ''}
+                </div>
+                <div class="chain-content">
+                    <div class="chain-header">${c.from_officer} → ${c.to_officer}</div>
+                    <div class="chain-meta">${fmtDT(c.transfer_datetime)} | ${c.reason}</div>
+                    <div class="chain-meta">Condition: ${c.condition_at_transfer}</div>
+                </div>
+            </div>`).join('')}</div>
+
+        ${(d.examinations || []).length ? `
+        <div class="divider"></div>
+        <div class="card-title">Examinations</div>
+        ${d.examinations.map(ex => `
+            <div style="padding:10px;background:var(--bg3);border-radius:6px;margin-bottom:8px">
+                <div class="flex-between"><strong>${ex.type_name}</strong>${statusBadge(ex.status)}</div>
+                <div class="mono" style="font-size:11px;margin-top:4px">${ex.examiner_name} | Started: ${fmtDate(ex.start_date)}</div>
+                ${ex.findings_summary ? `<div style="margin-top:6px;color:var(--text2);font-size:12px">${ex.findings_summary}</div>` : ''}
+                ${ex.report_text ? `<div style="margin-top:6px;color:var(--greenl);font-size:12px">✓ Report filed — Admissible: ${ex.is_admissible ? 'Yes' : 'No'}</div>` : ''}
+            </div>`).join('')}` : ''}
+
+        <div class="divider"></div>
+        <div class="card-title" style="display:flex;align-items:center;gap:8px">
+          🤖 AI Forensic Intelligence
+          <span style="font-size:11px;font-weight:400;color:var(--text2);background:var(--bg3);padding:2px 8px;border-radius:12px;border:1px solid var(--border)">DETERMINISTIC + SEMANTIC ANALYSIS</span>
+        </div>
+
+        <!-- Temporal & Geospatial Anomaly Detection -->
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-weight:600;font-size:13px">📍 Temporal &amp; Geospatial Anomaly Detection</div>
+            <span style="font-size:10px;color:var(--text3);font-style:italic">Haversine distance · deterministic calculation</span>
+          </div>
+          <div id="anomalyResult-${eid}" style="font-size:12px;color:var(--text2)">
+            <em>⏳ Running anomaly analysis…</em>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:var(--text3);font-style:italic;border-top:1px dashed var(--border);padding-top:6px">
+            ⚠ Anomaly detection is a deterministic mathematical analysis of custody timestamps and geographic coordinates.
+            Detected anomalies are potential inconsistencies requiring review and do not constitute proof of fraud or misconduct.
+          </div>
+        </div>
+
+        <!-- Cross-Case Evidence Linkage -->
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+            <div style="font-weight:600;font-size:13px">🔗 Cross-Case Evidence Linkage</div>
+            <button id="crossCaseBtn-${eid}" class="btn btn-outline btn-sm"
+                    onclick="runCrossCaseSearch(${eid})" style="font-size:11px;padding:4px 12px">
+              🔍 Find Potential Cross-Case Links
+            </button>
+          </div>
+          <div id="crossCaseResult-${eid}" style="font-size:12px;color:var(--text2)">
+            <em>Click the button above to search for semantically similar evidence in other authorized cases.</em>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:var(--text3);font-style:italic;border-top:1px dashed var(--border);padding-top:6px">
+            ⚠ Cross-case links are POTENTIAL SEMANTIC LINKS based on vector similarity of forensic report content.
+            They are supporting signals only and do not constitute forensic proof of a case connection.
+          </div>
+        </div>
+    `;
+            // Auto-load anomaly detection
+            loadAnomalyDetection(eid);
+        }
+
+        async function loadAnomalyDetection(eid) {
+            const box = document.getElementById(`anomalyResult-${eid}`);
+            if (!box) return;
+            try {
+                const res = await get(`/ai/evidence/${eid}/anomalies`);
+                const det = res.anomaly_detection || {};
+                const anomalies = det.anomalies || [];
+                const numTransfers = det.transfers_analyzed ?? 0;
+
+                if (numTransfers < 2) {
+                    box.innerHTML = `<span style="color:var(--text2)">ℹ Insufficient custody transfer history.</span>
+                      <div style="margin-top:4px;font-size:11px;color:var(--text3)">At least 2 custody transfers with geographic location coordinates are required to calculate travel speed and distance. (Currently ${numTransfers} transfer recorded for E${String(eid).padStart(3,'0')}).</div>`;
+                } else if (anomalies.length === 0) {
+                    box.innerHTML = `<span style="color:var(--greenl)">✓ No temporal or geospatial anomalies detected across ${numTransfers} custody transfers.</span>
+                      <div style="margin-top:4px;font-size:11px;color:var(--text3)">All custody transfers were completed within plausible geographic travel speeds.</div>`;
+                } else {
+                    const severityColor = (s) => s === 'HIGH' ? 'var(--red)' : s === 'MEDIUM' ? 'var(--orange, #f59e0b)' : 'var(--text2)';
+                    box.innerHTML = `<div style="color:var(--red);font-weight:600;margin-bottom:8px">⚠ ${anomalies.length} Anomaly${anomalies.length > 1 ? ' / Anomalies' : ''} Detected</div>` +
+                        anomalies.map(a => `
+                        <div style="border:1px solid var(--border);border-left:3px solid ${severityColor(a.severity)};border-radius:6px;padding:10px;margin-bottom:8px;background:var(--bg2)">
+                          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                            <span style="font-weight:600;color:${severityColor(a.severity)}">${a.type.replace(/_/g,' ')}</span>
+                            <span class="badge badge-${a.severity === 'HIGH' ? 'danger' : 'warning'}">${a.severity}</span>
+                          </div>
+                          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:8px">
+                            <div><span style="color:var(--text3)">From:</span> ${a.from_location || '—'}</div>
+                            <div><span style="color:var(--text3)">To:</span> ${a.to_location || '—'}</div>
+                            ${a.distance_km !== undefined ? `<div><span style="color:var(--text3)">Distance:</span> ${a.distance_km} km</div>` : ''}
+                            ${a.elapsed_minutes !== undefined ? `<div><span style="color:var(--text3)">Elapsed:</span> ${a.elapsed_minutes} min</div>` : ''}
+                            ${a.implied_speed_kmh !== undefined ? `<div><span style="color:var(--text3)">Implied Speed:</span> <strong>${a.implied_speed_kmh} km/h</strong></div>` : ''}
+                            ${a.threshold_kmh !== undefined ? `<div><span style="color:var(--text3)">Threshold:</span> ${a.threshold_kmh} km/h</div>` : ''}
+                            <div><span style="color:var(--text3)">Transfer Log:</span> #${a.log_id}</div>
+                            <div><span style="color:var(--text3)">Previous Log:</span> #${a.previous_log_id || '—'}</div>
+                          </div>
+                          <div style="color:var(--text2);font-size:11px;border-top:1px dashed var(--border);padding-top:6px">${a.explanation}</div>
+                        </div>`).join('');
+                }
+            } catch (err) {
+                box.innerHTML = `<span style="color:var(--text3)">⚠ Could not load anomaly detection: ${err.message || 'Server error'}</span>`;
+            }
+        }
+
+        async function runCrossCaseSearch(eid) {
+            const btn = document.getElementById(`crossCaseBtn-${eid}`);
+            const box = document.getElementById(`crossCaseResult-${eid}`);
+            if (!btn || !box) return;
+            btn.disabled = true;
+            btn.textContent = '⏳ Searching…';
+            box.innerHTML = '<em style="color:var(--text2)">Searching authorized cases for semantically similar evidence…</em>';
+            try {
+                const res = await get(`/ai/evidence/${eid}/cross-case-links`);
+                const links = res.links || [];
+                if (links.length === 0) {
+                    box.innerHTML = `<span style="color:var(--text2)">No potential cross-case links found above the similarity threshold (${res.similarity_threshold || 0.70}).</span>`;
+                } else {
+                    box.innerHTML = `<div style="color:var(--accent);font-weight:600;margin-bottom:8px">🔗 ${links.length} Potential Link${links.length > 1 ? 's' : ''} Found</div>` +
+                        links.map(l => `
+                        <div style="border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:10px;margin-bottom:8px;background:var(--bg2)">
+                          <div style="display:flex;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:4px">
+                            <span class="badge badge-info">POTENTIAL SEMANTIC LINK</span>
+                            <span style="font-weight:700;color:var(--accent)">Similarity: ${(l.similarity_score * 100).toFixed(1)}%</span>
+                          </div>
+                          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:8px;font-size:12px">
+                            <div><span style="color:var(--text3)">Linked Evidence:</span> E${String(l.linked_evidence_id).padStart(3,'0')}</div>
+                            <div><span style="color:var(--text3)">Case ID:</span> ${l.linked_case_id || '—'}</div>
+                            ${l.case_fir ? `<div><span style="color:var(--text3)">FIR:</span> <span class="mono">${l.case_fir}</span></div>` : ''}
+                            ${l.examiner_name ? `<div><span style="color:var(--text3)">Examiner:</span> ${l.examiner_name}</div>` : ''}
+                            ${l.lab_name ? `<div><span style="color:var(--text3)">Lab:</span> ${l.lab_name}</div>` : ''}
+                            ${l.filed_on ? `<div><span style="color:var(--text3)">Filed:</span> ${l.filed_on}</div>` : ''}
+                          </div>
+                          ${l.evidence_description ? `<div style="font-size:11px;color:var(--text2);margin-bottom:6px"><span style="color:var(--text3)">Evidence:</span> ${l.evidence_description}</div>` : ''}
+                          ${l.report_summary ? `<div style="font-size:11px;color:var(--text2);background:var(--bg3);padding:6px;border-radius:4px;margin-bottom:6px"><span style="color:var(--text3)">Report excerpt:</span> ${l.report_summary}</div>` : ''}
+                          <div style="color:var(--text3);font-size:11px;border-top:1px dashed var(--border);padding-top:6px">${l.explanation}</div>
+                        </div>`).join('');
+                }
+            } catch (err) {
+                box.innerHTML = `<span style="color:var(--text3)">⚠ Could not search cross-case links: ${err.message || 'Server error'}</span>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔍 Find Potential Cross-Case Links';
+            }
+        }
+
+        async function runVisionAnalysis(eid) {
+
+            const btn = document.getElementById(`visionBtn-${eid}`);
+            const resultBox = document.getElementById(`visionResult-${eid}`);
+            if (!btn || !resultBox) return;
+
+            // Loading state
+            btn.disabled = true;
+            btn.textContent = '⏳ Analyzing...';
+            resultBox.innerHTML = '<em style="color:var(--text2)">Running Vision AI analysis — please wait...</em>';
+
+            try {
+                const res = await get(`/evidence/${eid}/vision-analysis`);
+
+                // No image case
+                if (res.status === 'NO_IMAGE' || res.status === 'NOT_FOUND' || res.status === 'FILE_NOT_FOUND') {
+                    resultBox.innerHTML = `<div class="alert-box warning" style="margin:0;font-size:12px">⚠ ${res.message || 'No photographic evidence available for this evidence item.'}</div>`;
+                    btn.textContent = '🔍 Analyze Image with Vision AI';
+                    btn.disabled = false;
+                    return;
+                }
+
+                const va = res.vision_analysis || {};
+                const cc = res.visual_cross_check || {};
+                const sha = res.sha256_integrity || {};
+
+                // Vision analysis status label
+                const statusMap = {
+                    'ANALYZED': { label: '✅ Vision AI Analysis Complete', cls: 'success' },
+                    'UNAVAILABLE_NO_API_KEY': { label: '⚠ Vision AI Unavailable — No API Key Configured', cls: 'warning' },
+                    'API_ERROR': { label: '⚠ Vision AI Unavailable — API Error / Quota Exceeded', cls: 'warning' },
+                    'NO_IMAGE': { label: '📷 No Photograph Available', cls: 'info' }
+                };
+                const st = statusMap[va.status] || { label: va.status || 'Unknown', cls: 'warning' };
+
+                // Warnings from cross-checker
+                let warningsHtml = '';
+                if (cc.warnings && cc.warnings.length > 0) {
+                    warningsHtml = cc.warnings.map(w => `
+                        <div class="alert-box danger" style="margin:4px 0;font-size:11px">
+                            ⚠ <strong>${w.type}</strong> (${w.severity}): ${w.description}
+                            <div style="margin-top:2px;color:var(--text2)">${w.action || ''}</div>
+                        </div>`).join('');
+                }
+
+                // Observations
+                const obsHtml = va.observations && va.observations.length
+                    ? va.observations.map(o => `<li style="margin-bottom:2px">${o}</li>`).join('')
+                    : '<li>No specific visual observations available.</li>';
+
+                // Confidence — only show if explicitly provided by Vision API
+                const confHtml = (va.confidence !== null && va.confidence !== undefined)
+                    ? `<div style="margin-top:4px"><strong>Model Confidence:</strong> ${(va.confidence * 100).toFixed(0)}% — <em>Note: Visual AI confidence is probabilistic, not forensically conclusive.</em></div>`
+                    : '';
+
+                // Visual-DB Consistency formatting
+                let consistencyHtml = '';
+                if (cc.check_status === 'NOT_EVALUATED' || cc.is_consistent === null || cc.is_consistent === undefined) {
+                    consistencyHtml = `
+                        <span class="badge badge-gray" style="margin-left:6px">NOT EVALUATED</span>
+                        <span style="color:var(--text2);margin-left:8px;font-size:11px">Reason: Vision AI analysis is unavailable.</span>`;
+                } else if (cc.is_consistent) {
+                    consistencyHtml = `
+                        <span class="badge badge-success" style="margin-left:6px">✓ Consistent</span>
+                        <span style="color:var(--text2);margin-left:8px;font-size:11px">${cc.summary || ''}</span>`;
+                } else {
+                    consistencyHtml = `
+                        <span class="badge badge-danger" style="margin-left:6px">⚠ Inconsistency Detected</span>
+                        <span style="color:var(--text2);margin-left:8px;font-size:11px">${cc.summary || ''}</span>`;
+                }
+
+                resultBox.innerHTML = `
+                    <div class="alert-box ${st.cls}" style="margin:0 0 8px 0;font-size:12px"><strong>${st.label}</strong></div>
+
+                    ${va.status === 'UNAVAILABLE_NO_API_KEY' ? `
+                    <div style="color:var(--text2);margin-bottom:8px">
+                        ${va.message || 'Visual AI analysis is currently unavailable (No Vision API configured).'}
+                        <br><em>To enable Vision AI, configure a valid LLM_API_KEY with vision support in your .env file.</em>
+                    </div>` : `
+                    <div style="margin-bottom:8px">
+                        <strong>Visual Observations:</strong>
+                        <ul style="margin:4px 0 4px 16px;padding:0">${obsHtml}</ul>
+                        ${va.visible_condition ? `<div><strong>Visible Condition:</strong> ${va.visible_condition}</div>` : ''}
+                        ${va.seal_observation && va.seal_observation !== 'None' ? `<div><strong>Seal/Tag Observation:</strong> ${va.seal_observation}</div>` : ''}
+                        ${va.potential_visual_anomalies && va.potential_visual_anomalies.length ? `<div><strong>Potential Anomalies:</strong> ${va.potential_visual_anomalies.join(', ')}</div>` : ''}
+                        ${confHtml}
+                    </div>`}
+
+                    <div style="margin-bottom:6px">
+                        <strong>Visual-DB Consistency:</strong> ${consistencyHtml}
+                    </div>
+                    ${warningsHtml}
+                    <div style="font-size:10px;color:var(--text3);margin-top:6px;border-top:1px dashed var(--border);padding-top:4px">
+                        Model: ${va.model_used || 'N/A'} &nbsp;|&nbsp; ${res.disclaimer || ''}
+                    </div>`;
+
+                btn.textContent = '🔄 Re-analyze';
+                btn.disabled = false;
+
+            } catch (err) {
+                resultBox.innerHTML = `<div class="alert-box danger" style="margin:0;font-size:12px">❌ Vision AI analysis failed: ${err.message || 'Network or server error.'} <button class="btn btn-outline btn-sm" style="margin-left:8px" onclick="runVisionAnalysis(${eid})">Retry</button></div>`;
+                btn.textContent = '🔍 Analyze Image with Vision AI';
+                btn.disabled = false;
+            }
+        }
+
+        async function checkImageIntegrity(eid) {
+            const res = await get(`/evidence/${eid}/image-integrity`);
+            if (res.integrity === 'INTACT') {
+                toast(`✓ SHA-256 Hash Match — Image file bytes intact!`, 'success');
+            } else if (res.integrity === 'COMPROMISED') {
+                toast(`✖ SHA-256 Hash Mismatch — Image file is COMPROMISED!`, 'danger');
+            } else {
+                toast(`Image Status: ${res.integrity}`, 'warning');
+            }
+        }
+
+        async function openUploadMore(eid) {
+            document.getElementById('umEvId').value = eid;
+            document.getElementById('umPreview').innerHTML = '';
+            const officers = await get('/lookup/officers');
+            populateSelect('umOfficer', officers, 'officer_id', 'full_name');
+            openModal('uploadMoreModal');
+        }
+
+        async function doUploadMore() {
+            const eid = document.getElementById('umEvId').value;
+            const file = document.getElementById('umFile').files[0];
+            if (!file) { toast('Please select a file', 'warning'); return; }
+            const f = new FormData();
+            f.append('media', file);
+            f.append('event_type', document.getElementById('umEventType').value);
+            f.append('taken_by', document.getElementById('umOfficer').value || '1');
+            f.append('notes', document.getElementById('umNotes').value);
+            const r = await postForm(`/evidence/${eid}/media`, f);
+            if (r.success) { closeModal('uploadMoreModal'); toast('Media uploaded!', 'success'); loadEvidence(); }
+            else toast(r.error || 'Upload failed', 'danger');
+        }
+
+        function quickHash(eid) { document.getElementById('hashEvId').value = eid; openModal('hashModal'); }
+
+        async function doVerifyHash() {
+            const eid = document.getElementById('hashEvId').value;
+            const file = document.getElementById('hashFile').files[0];
+            if (!eid || !file) { toast('Select a file to verify', 'warning'); return; }
+            const f = new FormData(); f.append('media', file);
+            const r = await postForm(`/evidence/${eid}/verify-hash`, f);
+            const map = {
+                'HASH_VERIFIED_INTACT': { c: 'success', m: '✓ HASH VERIFIED — Evidence is intact. No tampering detected.' },
+                'HASH_MISMATCH_TAMPERED': { c: 'danger', m: '✕ HASH MISMATCH — Evidence has been TAMPERED. Tamper incident auto-logged!' },
+                'NO_HASH_STORED': { c: 'warning', m: '⚠ No hash stored for this evidence (non-digital evidence).' }
+            };
+            const result = map[r.result] || { c: 'warning', m: 'Unknown result: ' + r.result };
+            document.getElementById('hashResult').innerHTML = `<div class="alert-box ${result.c}">${result.m}</div>`;
+            if (r.result === 'HASH_MISMATCH_TAMPERED') { loadEvidence(); loadAlertCount(); }
+        }
+
+        loadEvidence(); loadDropdowns();
+    </script>
+</body>
+
+</html>

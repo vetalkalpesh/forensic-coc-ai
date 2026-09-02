@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Forensic AI Assistant — Forensic CoC</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/ai_assistant.css">
+</head>
+<body>
+<div id="app" style="display:flex;width:100%">
+    <div class="main">
+        <div class="topbar">
+            <div>
+                <div class="topbar-title">Forensic AI Assistant</div>
+                <div class="topbar-sub">HYBRID RETRIEVAL-AUGMENTED GENERATION (RAG) FORENSIC INTELLIGENCE</div>
+            </div>
+            <div class="topbar-right">
+                <span class="mono" id="clock" style="color:var(--text3);font-size:12px"></span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="ai-container">
+                <div class="ai-grid">
+                    <!-- Chat Area -->
+                    <div class="chat-card">
+                        <div class="chat-header">
+                            <div class="chat-header-title">
+                                🤖 Forensic Intelligence Assistant
+                            </div>
+                            <div class="chat-method-selector">
+                                <label for="retrievalMethodSelect">Retrieval Method:</label>
+                                <select id="retrievalMethodSelect">
+                                    <option value="HYBRID" selected>Proposed (Hybrid SQL + Vector)</option>
+                                    <option value="FULLTEXT">Baseline A (MySQL FULLTEXT)</option>
+                                    <option value="VECTOR">Baseline B (Vector-Only)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Messages Window -->
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="chat-bubble ai">
+                                <div class="ai-answer-content">
+                                    👋 Welcome to the <strong>Hybrid RAG Forensic Intelligence Assistant</strong>.<br><br>
+                                    You can ask natural-language questions about criminal cases, evidence chain of custody, forensic laboratory reports, storage locations, court submissions, and tamper incidents.<br><br>
+                                    Select a suggested query from the panel on the right or type your question below.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Bar -->
+                        <div class="chat-input-bar">
+                            <input type="text" id="aiQueryInput" placeholder="Ask a natural-language question (e.g. 'Give me the complete history of evidence E001')..." autocomplete="off">
+                            <button class="btn btn-primary" onclick="sendQuery()">Send Query</button>
+                        </div>
+                    </div>
+
+                    <!-- Suggested Queries Sidebar -->
+                    <div class="suggested-card">
+                        <div style="font-size:12px;font-weight:600;color:var(--accent);letter-spacing:1px;text-transform:uppercase">
+                            Suggested Queries
+                        </div>
+                        <div id="suggestedPills" style="display:flex;flex-direction:column;gap:8px">
+                            <div class="loading">Loading suggested queries...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tiered Why Explanation Modal -->
+<div class="modal-overlay" id="whyModal">
+    <div class="modal" style="width:720px">
+        <div class="modal-header">
+            <div class="modal-title">❓ Source Provenance & Retrieval Explanation</div>
+            <button class="modal-close" onclick="closeModal('whyModal')">×</button>
+        </div>
+        <div class="modal-body" id="whyModalBody">
+            <div class="loading">Loading explanation...</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="closeModal('whyModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/app.js"></script>
+<script src="static/js/ai_assistant.js"></script>
+<script>
+    setInterval(() => {
+        const clk = document.getElementById('clock');
+        if (clk) clk.textContent = new Date().toLocaleString('en-IN');
+    }, 1000);
+</script>
+</body>
+</html>

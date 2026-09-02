@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Custody Log — Forensic CoC</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div id="app" style="display:flex;width:100%">
+        <div class="main">
+            <div class="topbar">
+                <div>
+                    <div class="topbar-title">Chain of Custody</div>
+                    <div class="topbar-sub">ALL EVIDENCE TRANSFERS & TEMPORAL ANALYSIS</div>
+                </div>
+                <div class="topbar-right"><button class="btn btn-outline" onclick="loadTemporal()">🕐 Temporal
+                        Anomalies</button><button class="btn btn-primary req-senior" onclick="openModal('trModal')">+ Transfer
+                        Evidence</button></div>
+            </div>
+            <div class="content">
+                <div class="search-bar"><span>🔍</span><input type="text" id="cSearch"
+                        placeholder="Search custody records..."></div>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table id="cTable">
+                            <thead>
+                                <tr>
+                                    <th>Log ID</th>
+                                    <th>Evidence</th>
+                                    <th>FIR</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Transfer Time</th>
+                                    <th>Reason</th>
+                                    <th>Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cBody">
+                                <tr>
+                                    <td colspan="8" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card" id="temporalCard" style="display:none">
+                    <div class="card-title">🕐 Temporal Anomaly Detection</div>
+                    <div class="alert-box info" style="margin-bottom:16px">Transfers where recording delay exceeded 4
+                        hours are flagged as SUSPICIOUS — potential evidence of tampering or delayed reporting.</div>
+                    <div id="temporalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="trModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">Transfer Evidence Custody</span><button
+                    class="modal-close" onclick="closeModal('trModal')">×</button></div>
+            <div class="modal-body">
+                <div class="alert-box info">Trigger will BLOCK this transfer if you are not the current holder of the
+                    evidence.</div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Evidence ID *</label><input class="form-control"
+                            id="trEv" type="number"></div>
+                    <div class="form-group"><label class="form-label">Transfer Date/Time *</label><input
+                            class="form-control" id="trDt" type="datetime-local"></div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">Transferred By (Current Holder) *</label><select class="form-control" id="trFrom"></select></div>
+                    <div class="form-group"><label class="form-label">Received By *</label><select class="form-control" id="trTo"></select></div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group"><label class="form-label">From Department *</label><select
+                            class="form-control" id="trFd"></select></div>
+                    <div class="form-group"><label class="form-label">To Department *</label><select
+                            class="form-control" id="trTd"></select></div>
+                </div>
+                <div class="form-group"><label class="form-label">New Evidence Status *</label>
+                    <select class="form-control" id="trStatus">
+                        <option value="In Storage">In Storage</option>
+                        <option value="In Lab">In Lab</option>
+                        <option value="In Court">In Court</option>
+                        <option value="Returned">Returned</option>
+                    </select>
+                </div>
+                <div class="form-group"><label class="form-label">Authorized By *</label><select class="form-control"
+                        id="trAuth"></select></div>
+                <div class="form-group"><label class="form-label">Reason *</label><input class="form-control"
+                        id="trReason" placeholder="Reason for transfer..."></div>
+                <div class="form-group"><label class="form-label">Condition at Transfer *</label><input
+                        class="form-control" id="trCond" placeholder="Physical condition of evidence..."></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-outline"
+                    onclick="closeModal('trModal')">Cancel</button><button class="btn btn-primary"
+                    onclick="doTransfer()">Transfer Custody</button></div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+    <script>
+        async function load() {
+            const logs = await get('/custody');
+            document.getElementById('cBody').innerHTML = logs.map(l => `<tr>
+        <td><span class="mono">#${l.log_id}</span></td>
+        <td><span class="mono">E${String(l.evidence_id).padStart(3, '0')}</span> ${l.evidence_desc}</td>
+        <td><span class="mono" style="font-size:11px">${l.fir_number}</span></td>
+        <td>${l.from_officer}</td><td>${l.to_officer}</td>
+        <td>${fmtDT(l.transfer_datetime)}</td>
+        <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.reason}</td>
+        <td>${l.condition_at_transfer}</td>
+    </tr>`).join('') || '<tr><td colspan="8" class="empty">No records</td></tr>';
+            searchTable('cSearch', 'cTable');
+        }
+        async function loadDD() {
+            const [o, d] = await Promise.all([get('/lookup/officers'), get('/lookup/departments')]);
+            ['trFrom', 'trTo', 'trAuth'].forEach(id => populateSelect(id, o, 'officer_id', 'full_name'));
+            ['trFd', 'trTd'].forEach(id => populateSelect(id, d, 'dept_id', 'dept_name'));
+            document.getElementById('trDt').value = new Date().toISOString().slice(0, 16);
+        }
+        async function doTransfer() {
+            const r = await post('/custody/transfer', { evidence_id: document.getElementById('trEv').value, transferred_by: document.getElementById('trFrom').value, received_by: document.getElementById('trTo').value, from_dept: document.getElementById('trFd').value, to_dept: document.getElementById('trTd').value, authorized_by: document.getElementById('trAuth').value, reason: document.getElementById('trReason').value, condition: document.getElementById('trCond').value, transfer_datetime: document.getElementById('trDt').value.replace('T', ' ') + ':00', new_status: document.getElementById('trStatus').value });
+            if (r.success) { closeModal('trModal'); toast('Custody transferred!', 'success'); load(); }
+            else toast(r.error || 'Transfer blocked by trigger — check chain of custody rules', 'danger');
+        }
+        async function loadTemporal() {
+            const card = document.getElementById('temporalCard');
+            card.style.display = 'block';
+            const data = await get('/views/temporal-anomalies');
+            document.getElementById('temporalContent').innerHTML = `<div class="table-wrap"><table>
+        <thead><tr><th>Log</th><th>Evidence</th><th>From</th><th>To</th><th>Actual Time</th><th>DB Entry Time</th><th>Delay</th><th>Flag</th></tr></thead>
+        <tbody>${data.map(r => `<tr>
+            <td><span class="mono">#${r.log_id}</span></td>
+            <td>E${String(r.evidence_id).padStart(3, '0')} ${r.description}</td>
+            <td>${r.transferred_by}</td><td>${r.received_by}</td>
+            <td>${fmtDT(r.transfer_datetime)}</td><td>${fmtDT(r.recorded_datetime)}</td>
+            <td><span class="mono" style="color:${r.delay_hours > 4 ? 'var(--redl)' : 'var(--greenl)'}">${r.delay_hours}h</span></td>
+            <td>${r.temporal_flag === 'Normal' ? '<span class="badge badge-green">Normal</span>' : '<span class="badge badge-red">⚠ Suspicious</span>'}</td>
+        </tr>`).join('')}</tbody></table></div>`;
+            card.scrollIntoView({ behavior: 'smooth' });
+        }
+        load(); loadDD();
+    </script>
+</body>
+
+</html>

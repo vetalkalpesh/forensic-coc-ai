@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Officers — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar"><div><div class="topbar-title">Officers & Access Control</div><div class="topbar-sub">REGISTERED OFFICERS & ROLE-BASED PERMISSIONS</div></div></div>
+<div class="content">
+    <div class="alert-box info" style="margin-bottom:20px">
+        <span style="font-size:18px">🔐</span>
+        <div>Role-based access control is enforced at the <strong>MySQL database level</strong> using GRANT/REVOKE statements — not just the application. Each role has specific table-level permissions defined directly in MySQL.</div>
+    </div>
+
+    <!-- Role Permissions Table -->
+    <div class="card">
+        <div class="card-title">Database Role Permissions (RBAC)</div>
+        <div class="table-wrap"><table>
+            <thead><tr><th>DB Role</th><th>SELECT</th><th>INSERT</th><th>UPDATE</th><th>DELETE</th><th>Procedures</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-gray">junior_officer</span></td>
+                    <td style="color:var(--greenl)">Evidence, CustodyLog, Cases</td>
+                    <td style="color:var(--greenl)">CustodyLog only</td>
+                    <td style="color:var(--redl)">None</td>
+                    <td style="color:var(--redl)">None</td>
+                    <td style="color:var(--text2)">None</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-blue">forensic_examiner</span></td>
+                    <td style="color:var(--greenl)">Evidence, Examinations</td>
+                    <td style="color:var(--greenl)">Examination, Report</td>
+                    <td style="color:var(--greenl)">Examination only</td>
+                    <td style="color:var(--redl)">None</td>
+                    <td style="color:var(--text2)">verify_hash</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-orange">supervisor</span></td>
+                    <td style="color:var(--greenl)">All Tables</td>
+                    <td style="color:var(--greenl)">All Tables</td>
+                    <td style="color:var(--greenl)">All Tables</td>
+                    <td style="color:var(--orangel)">With approval</td>
+                    <td style="color:var(--text2)">All procedures</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-red">admin</span></td>
+                    <td style="color:var(--greenl)">Full Access</td>
+                    <td style="color:var(--greenl)">Full Access</td>
+                    <td style="color:var(--greenl)">Full Access</td>
+                    <td style="color:var(--greenl)">Full Access</td>
+                    <td style="color:var(--text2)">All + GRANT/REVOKE</td>
+                </tr>
+            </tbody>
+        </table></div>
+        <div style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:6px;font-family:var(--mono);font-size:12px;color:var(--text3)">
+            -- To create these roles in MySQL, uncomment in complete_database.sql (Section 8)<br>
+            CREATE USER 'junior_officer'@'localhost' IDENTIFIED BY 'Junior@2024';<br>
+            GRANT SELECT ON forensic_coc.Evidence TO 'junior_officer'@'localhost';<br>
+            GRANT SELECT, INSERT ON forensic_coc.CustodyLog TO 'junior_officer'@'localhost';
+        </div>
+    </div>
+
+    <!-- Officers Table -->
+    <div class="card">
+        <div class="card-title">All Registered Officers</div>
+        <div class="search-bar"><span>🔍</span><input type="text" id="oSearch" placeholder="Search officers..."></div>
+        <div class="table-wrap"><table id="oTable">
+            <thead><tr><th>Badge</th><th>Full Name</th><th>Designation</th><th>Dept</th><th>Rank</th><th>Date Joined</th><th>Status</th></tr></thead>
+            <tbody id="oBody"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody>
+        </table></div>
+    </div>
+</div></div></div>
+
+<script src="static/js/app.js"></script>
+<script>
+async function load(){
+    const officers = await get('/officers');
+    document.getElementById('oBody').innerHTML = officers.map(o=>`<tr>
+        <td><span class="mono">${o.badge_number}</span></td>
+        <td><strong>${o.full_name}</strong></td>
+        <td>${o.designation}</td>
+        <td>${o.dept_name}</td>
+        <td><span class="badge badge-gray">${o.designation}</span></td>
+        <td>${fmtDate(o.date_joined)}</td>
+        <td>${o.is_active
+            ? '<span class="badge badge-green">Active</span>'
+            : '<span class="badge badge-red">Inactive</span>'}</td>
+    </tr>`).join('') || '<tr><td colspan="7" class="empty">No officers</td></tr>';
+    searchTable('oSearch','oTable');
+}
+load();
+</script></body></html>

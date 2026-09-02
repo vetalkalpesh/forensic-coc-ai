@@ -1,0 +1,80 @@
+<!-- forensic.html -->
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Forensic Lab — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar"><div><div class="topbar-title">Forensic Lab</div><div class="topbar-sub">EXAMINATIONS & REPORTS</div></div>
+<div class="topbar-right"><button class="btn btn-primary req-senior" onclick="openModal('addExamModal')">+ Assign Examination</button></div></div>
+<div class="content">
+    <div class="search-bar"><span>🔍</span><input type="text" id="eSearch" placeholder="Search examinations..."></div>
+    <div class="card"><div class="table-wrap"><table id="eTable">
+        <thead><tr><th>ID</th><th>Evidence</th><th>FIR</th><th>Exam Type</th><th>Examiner</th><th>Lab</th><th>Started</th><th>Status</th><th>Report</th></tr></thead>
+        <tbody id="eBody"><tr><td colspan="9" class="loading">Loading...</td></tr></tbody>
+    </table></div></div>
+    <div class="card"><div class="card-title">⚠ Overdue Examinations</div><div id="overdueDiv"><div class="loading">Loading...</div></div></div>
+</div></div></div>
+
+<div class="modal-overlay" id="addExamModal"><div class="modal">
+    <div class="modal-header"><span class="modal-title">Assign Forensic Examination</span><button class="modal-close" onclick="closeModal('addExamModal')">×</button></div>
+    <div class="modal-body">
+        <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Select Evidence Item *</label><select class="form-control" id="xEvId"></select></div>
+            <div class="form-group"><label class="form-label">Start Date *</label><input class="form-control" id="xDate" type="date"></div>
+        </div>
+        <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Examiner *</label><select class="form-control" id="xExaminer"></select></div>
+            <div class="form-group"><label class="form-label">Exam Type *</label><select class="form-control" id="xType"></select></div>
+        </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addExamModal')">Cancel</button><button class="btn btn-primary" onclick="addExam()">Assign</button></div>
+</div></div>
+
+<div class="modal-overlay" id="reportModal"><div class="modal" style="width:640px">
+    <div class="modal-header"><span class="modal-title">File Examination Report</span><button class="modal-close" onclick="closeModal('reportModal')">×</button></div>
+    <div class="modal-body">
+        <input type="hidden" id="rExamId">
+        
+        <div class="form-group"><label class="form-label">Report Text *</label><textarea class="form-control" id="rText" rows="6" placeholder="Detailed examination findings, methods, conclusions..."></textarea></div>
+        <div class="form-group"><label class="form-label">Admissible in Court?</label>
+            <select class="form-control" id="rAdmissible"><option value="1">Yes — Admissible</option><option value="0">No — Not Admissible</option></select>
+        </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('reportModal')">Cancel</button><button class="btn btn-success" onclick="fileReport()">File Report</button></div>
+</div></div>
+
+<script src="static/js/app.js"></script>
+<script>
+async function load(){
+    const [exams,overdue,examiners,types,officers,evList]=await Promise.all([get('/examinations'),get('/views/overdue-examinations'),get('/lookup/examiners'),get('/lookup/exam-types'),get('/lookup/officers'),get('/evidence')]);
+    document.getElementById('eBody').innerHTML=exams.map(e=>`<tr>
+        <td><span class="mono">#${e.exam_id}</span></td>
+        <td><span class="mono">E${String(e.evidence_id).padStart(3,'0')}</span> ${e.evidence}</td>
+        <td><span class="mono" style="font-size:11px">${e.fir_number}</span></td>
+        <td>${e.exam_type}</td><td>${e.examiner}</td><td>${e.lab_name}</td>
+        <td>${fmtDate(e.start_date)}</td><td>${statusBadge(e.status)}</td>
+        <td>${e.report_id?'<span class="badge badge-green">Filed ✓</span>':`<button class="btn btn-outline btn-sm" onclick="openReport(${e.exam_id})">File Report</button>`}</td>
+    </tr>`).join('')||'<tr><td colspan="9" class="empty">No examinations</td></tr>';
+    searchTable('eSearch','eTable');
+    document.getElementById('overdueDiv').innerHTML=overdue.length?`
+        <div class="table-wrap"><table><thead><tr><th>Evidence</th><th>Exam Type</th><th>Examiner</th><th>Lab</th><th>Days Pending</th><th>SLA</th></tr></thead>
+        <tbody>${overdue.map(r=>`<tr><td>E${String(r.evidence_id).padStart(3,'0')} ${r.description}</td><td>${r.exam_type}</td><td>${r.examiner}</td><td>${r.lab_name}</td>
+        <td><span class="mono" style="color:var(--redl)">${r.days_pending} days</span></td><td>${r.sla_days} days</td></tr>`).join('')}</tbody></table></div>`
+        :'<div class="empty">No overdue examinations 🎉</div>';
+    populateSelect('xExaminer',examiners,'examiner_id','full_name');
+    populateSelect('xType',types,'type_id','type_name');
+    if (Array.isArray(evList)) {
+        populateSelect('xEvId', evList.map(e => ({id: e.evidence_id, text: `E${String(e.evidence_id).padStart(3,'0')} — ${e.description}`})), 'id', 'text');
+    }
+    document.getElementById('xDate').value=new Date().toISOString().slice(0,10);
+}
+async function addExam(){
+    const r=await post('/examinations',{evidence_id:document.getElementById('xEvId').value,examiner_id:document.getElementById('xExaminer').value,exam_type_id:document.getElementById('xType').value,start_date:document.getElementById('xDate').value});
+    if(r.success){closeModal('addExamModal');toast('Examination assigned!','success');load();}
+    else toast(r.error,'danger');
+}
+function openReport(id){document.getElementById('rExamId').value=id;openModal('reportModal');}
+async function fileReport(){
+    const r=await post(`/examinations/${document.getElementById('rExamId').value}/report`,{report_text:document.getElementById('rText').value,is_admissible:document.getElementById('rAdmissible').value});
+    if(r.success){closeModal('reportModal');toast('Report filed!','success');load();}
+    else toast(r.error,'danger');
+}
+load();
+</script></body></html>

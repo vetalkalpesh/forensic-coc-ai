@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Alerts — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar">
+    <div><div class="topbar-title">Alerts & Notifications</div><div class="topbar-sub">SYSTEM GENERATED ALERTS</div></div>
+    <div class="topbar-right">
+        <span id="unreadCount" class="badge badge-red" style="font-size:13px;padding:5px 12px"></span>
+        <button class="btn btn-outline" onclick="ackAll()">✓ Acknowledge All</button>
+    </div>
+</div>
+<div class="content">
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('all')">All</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('Tamper')">⚠ Tamper</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('HashMismatch')">🔑 Hash Mismatch</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('Expiry')">⏰ Expiry</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('Overdue')">📋 Overdue</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('DeadManSwitch')">💀 Dead Man Switch</button>
+        <button class="btn btn-outline btn-sm" onclick="filterAlerts('unread')">🔴 Unread Only</button>
+    </div>
+    <div id="alertsList"><div class="loading">Loading...</div></div>
+</div>
+</div></div>
+
+<script src="static/js/app.js"></script>
+<script>
+const ICONS = {Expiry:'⏰',Tamper:'⚠',Overdue:'📋',Escalation:'🚨',HashMismatch:'🔑',DeadManSwitch:'💀'};
+let allAlerts = [];
+let currentFilter = 'all';
+
+async function load(){
+    allAlerts = await get('/alerts');
+    const unread = allAlerts.filter(a=>!a.is_acknowledged).length;
+    const uc = document.getElementById('unreadCount');
+    uc.textContent = unread + ' Unread';
+    uc.style.display = unread > 0 ? 'inline-block' : 'none';
+    renderAlerts();
+}
+
+function filterAlerts(type){
+    currentFilter = type;
+    renderAlerts();
+}
+
+function renderAlerts(){
+    let filtered = allAlerts;
+    if(currentFilter === 'unread')       filtered = allAlerts.filter(a=>!a.is_acknowledged);
+    else if(currentFilter !== 'all')     filtered = allAlerts.filter(a=>a.alert_type===currentFilter);
+
+    document.getElementById('alertsList').innerHTML = filtered.length ? filtered.map(a=>`
+        <div class="alert-box ${a.is_acknowledged?'info':'danger'}" style="margin-bottom:10px;justify-content:space-between;align-items:flex-start">
+            <div style="flex:1">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+                    <span style="font-size:20px">${ICONS[a.alert_type]||'🔔'}</span>
+                    <strong style="font-size:14px">${a.alert_type}</strong>
+                    ${a.is_acknowledged
+                        ? '<span class="badge badge-green">Acknowledged</span>'
+                        : '<span class="badge badge-red">Unread</span>'}
+                    ${a.evidence_desc ? `<span class="badge badge-gray">${a.evidence_desc}</span>` : ''}
+                </div>
+                <div style="font-size:13px;line-height:1.5;margin-bottom:6px">${a.message}</div>
+                <div style="font-size:11px;font-family:var(--mono);color:var(--text3)">${fmtDT(a.generated_at)}</div>
+            </div>
+            ${!a.is_acknowledged ? `<button class="btn btn-outline btn-sm" style="margin-left:16px;flex-shrink:0" onclick="ack(${a.alert_id})">Acknowledge</button>` : ''}
+        </div>`).join('') : `<div class="empty">No alerts for filter: ${currentFilter}</div>`;
+}
+
+async function ack(id){
+    await post(`/alerts/${id}/acknowledge`,{});
+    await load();
+    loadAlertCount();
+}
+
+async function ackAll(){
+    const unread = allAlerts.filter(a=>!a.is_acknowledged);
+    await Promise.all(unread.map(a=>post(`/alerts/${a.alert_id}/acknowledge`,{})));
+    toast('All alerts acknowledged','success');
+    await load();
+    loadAlertCount();
+}
+
+load();
+</script></body></html>

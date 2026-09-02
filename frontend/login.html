@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Forensic Evidence System</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: var(--bg);
+            margin: 0;
+        }
+
+        .login-box {
+            background: var(--bg2);
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .login-sub {
+            font-size: 13px;
+            color: var(--text3);
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #errMsg {
+            color: var(--redl);
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <div class="login-title">Officer Login</div>
+        <div class="login-sub">Forensic Chain of Custody</div>
+        <div id="errMsg">Invalid credentials</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Badge Number</label>
+                <input class="form-control" type="text" id="badgeNo" placeholder="e.g. MH-2301" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Secure Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const badge = document.getElementById('badgeNo').value.trim();
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ badge, password })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.token) {
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('officer', JSON.stringify(data.officer));
+                    window.location.href = 'index.html';
+                } else {
+                    const err = document.getElementById('errMsg');
+                    err.textContent = data.error || 'Login failed';
+                    err.style.display = 'block';
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('errMsg').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

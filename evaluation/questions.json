@@ -1,0 +1,3007 @@
+[
+  {
+    "id": "Q_EID_1",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E001?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E001 (Blood sample collected from bedroom floor) is currently Collected."
+  },
+  {
+    "id": "Q_EID_2",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E002?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E002 (Kitchen knife with suspected bloodstains) is currently In Lab."
+  },
+  {
+    "id": "Q_EID_3",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E003?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E003 (Laptop seized from suspect \u2014 contains fraud data) is currently In Storage."
+  },
+  {
+    "id": "Q_EID_4",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E004?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E004 (SIM cloning device seized) is currently In Storage."
+  },
+  {
+    "id": "Q_EID_5",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E005?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E005 (Heroin sample 500g \u2014 lab analysis required) is currently In Lab."
+  },
+  {
+    "id": "Q_EID_6",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E006?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E006 (Polythene packaging with fingerprints) is currently In Storage."
+  },
+  {
+    "id": "Q_EID_7",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E007?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E007 (DNA swab taken from knife handle) is currently In Lab."
+  },
+  {
+    "id": "Q_EID_8",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E008?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E008 (Jewellery box recovered from pawn shop) is currently In Court."
+  },
+  {
+    "id": "Q_EID_9",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E009?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E009 (CCTV footage from school gate camera) is currently In Storage."
+  },
+  {
+    "id": "Q_EID_10",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E010?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E010 (Fingerprint lifted from window sill) is currently In Lab."
+  },
+  {
+    "id": "Q_EID_11",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E011?",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E011 (Hair strands recovered from suspect vehicle) is currently Collected."
+  },
+  {
+    "id": "Q_EID_12",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E012?",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E012 (Liquid substance in sealed vial from kitchen knife) is currently Collected."
+  },
+  {
+    "id": "Q_EID_13",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E013?",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E013 (Knife with suspected bloodstains recovered from victim's body) is currently Collected."
+  },
+  {
+    "id": "Q_EID_14",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E014?",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E014 (Transaction records extracted from shop floor) is currently Collected."
+  },
+  {
+    "id": "Q_EID_15",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E015?",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E015 (Financial documents seized from victim's body) is currently Collected."
+  },
+  {
+    "id": "Q_EID_16",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E016?",
+    "expected_entities": [
+      "E016"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E016 (DNA swab taken from suspect's jacket) is currently Collected."
+  },
+  {
+    "id": "Q_EID_17",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E017?",
+    "expected_entities": [
+      "E017"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E017 (Shoe impression cast from victim's body) is currently Collected."
+  },
+  {
+    "id": "Q_EID_18",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E018?",
+    "expected_entities": [
+      "E018"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E018 (Shoe impression cast from suspect residence) is currently Collected."
+  },
+  {
+    "id": "Q_EID_19",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E019?",
+    "expected_entities": [
+      "E019"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E019 (Liquid substance in sealed vial from door handle) is currently Collected."
+  },
+  {
+    "id": "Q_EID_20",
+    "category": "evidence_status",
+    "question": "What is the current status of evidence E020?",
+    "expected_entities": [
+      "E020"
+    ],
+    "expected_sources": [
+      "Evidence"
+    ],
+    "ground_truth": "Evidence E020 (Tissue specimen from crime scene) is currently Collected."
+  },
+  {
+    "id": "Q_HIST_1",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E001.",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E001."
+  },
+  {
+    "id": "Q_HIST_2",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E002.",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E002."
+  },
+  {
+    "id": "Q_HIST_3",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E003.",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E003."
+  },
+  {
+    "id": "Q_HIST_4",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E004.",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E004."
+  },
+  {
+    "id": "Q_HIST_5",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E005.",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E005."
+  },
+  {
+    "id": "Q_HIST_6",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E006.",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E006."
+  },
+  {
+    "id": "Q_HIST_7",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E007.",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E007."
+  },
+  {
+    "id": "Q_HIST_8",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E008.",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E008."
+  },
+  {
+    "id": "Q_HIST_9",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E009.",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E009."
+  },
+  {
+    "id": "Q_HIST_10",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E010.",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E010."
+  },
+  {
+    "id": "Q_HIST_11",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E011.",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E011."
+  },
+  {
+    "id": "Q_HIST_12",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E012.",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E012."
+  },
+  {
+    "id": "Q_HIST_13",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E013.",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E013."
+  },
+  {
+    "id": "Q_HIST_14",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E014.",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E014."
+  },
+  {
+    "id": "Q_HIST_15",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E015.",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E015."
+  },
+  {
+    "id": "Q_HIST_16",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E016.",
+    "expected_entities": [
+      "E016"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E016."
+  },
+  {
+    "id": "Q_HIST_17",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E017.",
+    "expected_entities": [
+      "E017"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E017."
+  },
+  {
+    "id": "Q_HIST_18",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E018.",
+    "expected_entities": [
+      "E018"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E018."
+  },
+  {
+    "id": "Q_HIST_19",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E019.",
+    "expected_entities": [
+      "E019"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E019."
+  },
+  {
+    "id": "Q_HIST_20",
+    "category": "evidence_history",
+    "question": "Give me the complete history of evidence E020.",
+    "expected_entities": [
+      "E020"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog"
+    ],
+    "ground_truth": "Complete history tracking for E020."
+  },
+  {
+    "id": "Q_CUST_1",
+    "category": "custody_chain",
+    "question": "Who handled evidence E001 after collection?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E001."
+  },
+  {
+    "id": "Q_CUST_2",
+    "category": "custody_chain",
+    "question": "Who handled evidence E002 after collection?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E002."
+  },
+  {
+    "id": "Q_CUST_3",
+    "category": "custody_chain",
+    "question": "Who handled evidence E003 after collection?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E003."
+  },
+  {
+    "id": "Q_CUST_4",
+    "category": "custody_chain",
+    "question": "Who handled evidence E004 after collection?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E004."
+  },
+  {
+    "id": "Q_CUST_5",
+    "category": "custody_chain",
+    "question": "Who handled evidence E005 after collection?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E005."
+  },
+  {
+    "id": "Q_CUST_6",
+    "category": "custody_chain",
+    "question": "Who handled evidence E006 after collection?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E006."
+  },
+  {
+    "id": "Q_CUST_7",
+    "category": "custody_chain",
+    "question": "Who handled evidence E007 after collection?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E007."
+  },
+  {
+    "id": "Q_CUST_8",
+    "category": "custody_chain",
+    "question": "Who handled evidence E008 after collection?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E008."
+  },
+  {
+    "id": "Q_CUST_9",
+    "category": "custody_chain",
+    "question": "Who handled evidence E009 after collection?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E009."
+  },
+  {
+    "id": "Q_CUST_10",
+    "category": "custody_chain",
+    "question": "Who handled evidence E010 after collection?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E010."
+  },
+  {
+    "id": "Q_CUST_11",
+    "category": "custody_chain",
+    "question": "Who handled evidence E011 after collection?",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E011."
+  },
+  {
+    "id": "Q_CUST_12",
+    "category": "custody_chain",
+    "question": "Who handled evidence E012 after collection?",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E012."
+  },
+  {
+    "id": "Q_CUST_13",
+    "category": "custody_chain",
+    "question": "Who handled evidence E013 after collection?",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E013."
+  },
+  {
+    "id": "Q_CUST_14",
+    "category": "custody_chain",
+    "question": "Who handled evidence E014 after collection?",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E014."
+  },
+  {
+    "id": "Q_CUST_15",
+    "category": "custody_chain",
+    "question": "Who handled evidence E015 after collection?",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E015."
+  },
+  {
+    "id": "Q_CUST_16",
+    "category": "custody_chain",
+    "question": "Who handled evidence E016 after collection?",
+    "expected_entities": [
+      "E016"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E016."
+  },
+  {
+    "id": "Q_CUST_17",
+    "category": "custody_chain",
+    "question": "Who handled evidence E017 after collection?",
+    "expected_entities": [
+      "E017"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E017."
+  },
+  {
+    "id": "Q_CUST_18",
+    "category": "custody_chain",
+    "question": "Who handled evidence E018 after collection?",
+    "expected_entities": [
+      "E018"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E018."
+  },
+  {
+    "id": "Q_CUST_19",
+    "category": "custody_chain",
+    "question": "Who handled evidence E019 after collection?",
+    "expected_entities": [
+      "E019"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E019."
+  },
+  {
+    "id": "Q_CUST_20",
+    "category": "custody_chain",
+    "question": "Who handled evidence E020 after collection?",
+    "expected_entities": [
+      "E020"
+    ],
+    "expected_sources": [
+      "CustodyLog",
+      "Officer"
+    ],
+    "ground_truth": "Custody transfer chain for E020."
+  },
+  {
+    "id": "Q_RPT_1",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E001?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E001."
+  },
+  {
+    "id": "Q_RPT_2",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E002?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E002."
+  },
+  {
+    "id": "Q_RPT_3",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E003?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E003."
+  },
+  {
+    "id": "Q_RPT_4",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E004?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E004."
+  },
+  {
+    "id": "Q_RPT_5",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E005?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E005."
+  },
+  {
+    "id": "Q_RPT_6",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E006?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E006."
+  },
+  {
+    "id": "Q_RPT_7",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E007?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E007."
+  },
+  {
+    "id": "Q_RPT_8",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E008?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E008."
+  },
+  {
+    "id": "Q_RPT_9",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E009?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E009."
+  },
+  {
+    "id": "Q_RPT_10",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E010?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E010."
+  },
+  {
+    "id": "Q_RPT_11",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E011?",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E011."
+  },
+  {
+    "id": "Q_RPT_12",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E012?",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E012."
+  },
+  {
+    "id": "Q_RPT_13",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E013?",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E013."
+  },
+  {
+    "id": "Q_RPT_14",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E014?",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E014."
+  },
+  {
+    "id": "Q_RPT_15",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E015?",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E015."
+  },
+  {
+    "id": "Q_RPT_16",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E016?",
+    "expected_entities": [
+      "E016"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E016."
+  },
+  {
+    "id": "Q_RPT_17",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E017?",
+    "expected_entities": [
+      "E017"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E017."
+  },
+  {
+    "id": "Q_RPT_18",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E018?",
+    "expected_entities": [
+      "E018"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E018."
+  },
+  {
+    "id": "Q_RPT_19",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E019?",
+    "expected_entities": [
+      "E019"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E019."
+  },
+  {
+    "id": "Q_RPT_20",
+    "category": "forensic_reports",
+    "question": "What did the forensic examiner conclude about evidence E020?",
+    "expected_entities": [
+      "E020"
+    ],
+    "expected_sources": [
+      "ExaminationReport",
+      "Examination"
+    ],
+    "ground_truth": "Examiner conclusions for E020."
+  },
+  {
+    "id": "Q_INT_1",
+    "category": "integrity_hash",
+    "question": "Does evidence E001 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E001."
+  },
+  {
+    "id": "Q_INT_2",
+    "category": "integrity_hash",
+    "question": "Does evidence E002 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E002."
+  },
+  {
+    "id": "Q_INT_3",
+    "category": "integrity_hash",
+    "question": "Does evidence E003 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E003."
+  },
+  {
+    "id": "Q_INT_4",
+    "category": "integrity_hash",
+    "question": "Does evidence E004 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E004."
+  },
+  {
+    "id": "Q_INT_5",
+    "category": "integrity_hash",
+    "question": "Does evidence E005 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E005."
+  },
+  {
+    "id": "Q_INT_6",
+    "category": "integrity_hash",
+    "question": "Does evidence E006 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E006."
+  },
+  {
+    "id": "Q_INT_7",
+    "category": "integrity_hash",
+    "question": "Does evidence E007 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E007."
+  },
+  {
+    "id": "Q_INT_8",
+    "category": "integrity_hash",
+    "question": "Does evidence E008 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E008."
+  },
+  {
+    "id": "Q_INT_9",
+    "category": "integrity_hash",
+    "question": "Does evidence E009 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E009."
+  },
+  {
+    "id": "Q_INT_10",
+    "category": "integrity_hash",
+    "question": "Does evidence E010 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E010."
+  },
+  {
+    "id": "Q_INT_11",
+    "category": "integrity_hash",
+    "question": "Does evidence E011 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E011."
+  },
+  {
+    "id": "Q_INT_12",
+    "category": "integrity_hash",
+    "question": "Does evidence E012 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E012."
+  },
+  {
+    "id": "Q_INT_13",
+    "category": "integrity_hash",
+    "question": "Does evidence E013 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E013."
+  },
+  {
+    "id": "Q_INT_14",
+    "category": "integrity_hash",
+    "question": "Does evidence E014 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E014."
+  },
+  {
+    "id": "Q_INT_15",
+    "category": "integrity_hash",
+    "question": "Does evidence E015 have any integrity issues or hash mismatches?",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "TamperIncident"
+    ],
+    "ground_truth": "Integrity status for E015."
+  },
+  {
+    "id": "Q_TAMP_1",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E002?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-001 details: Scratch marks observed on knife blade during examination. Possible post-collection damage.."
+  },
+  {
+    "id": "Q_TAMP_2",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E003?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-002 details: Anti-static bag seal appears to have been opened and resealed. Hash verification pending.."
+  },
+  {
+    "id": "Q_TAMP_3",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E005?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-003 details: Weight discrepancy noted \u2014 recorded 500g at collection but current weight is 492g.."
+  },
+  {
+    "id": "Q_TAMP_4",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E174?",
+    "expected_entities": [
+      "E174"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-004 details: Scratch marks observed on blade/surface during lab examination. Possible post-collection damage.."
+  },
+  {
+    "id": "Q_TAMP_5",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E068?",
+    "expected_entities": [
+      "E068"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-005 details: Unauthorized access attempt to digital evidence storage volume.."
+  },
+  {
+    "id": "Q_TAMP_6",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E033?",
+    "expected_entities": [
+      "E033"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-006 details: Packaging seal torn during transit. Evidence exposure suspected.."
+  },
+  {
+    "id": "Q_TAMP_7",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E066?",
+    "expected_entities": [
+      "E066"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-007 details: SHA-256 hash mismatch detected during integrity audit.."
+  },
+  {
+    "id": "Q_TAMP_8",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E194?",
+    "expected_entities": [
+      "E194"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-008 details: Packaging seal torn during transit. Evidence exposure suspected.."
+  },
+  {
+    "id": "Q_TAMP_9",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E012?",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-009 details: Unauthorized access attempt to digital evidence storage volume.."
+  },
+  {
+    "id": "Q_TAMP_10",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E050?",
+    "expected_entities": [
+      "E050"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-010 details: Temperature spike recorded in biological storage freezer unit.."
+  },
+  {
+    "id": "Q_TAMP_11",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E108?",
+    "expected_entities": [
+      "E108"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-011 details: Weight discrepancy noted \u2014 recorded weight at collection differs from lab measurement.."
+  },
+  {
+    "id": "Q_TAMP_12",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E022?",
+    "expected_entities": [
+      "E022"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-012 details: SHA-256 hash mismatch detected during integrity audit.."
+  },
+  {
+    "id": "Q_TAMP_13",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E031?",
+    "expected_entities": [
+      "E031"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-013 details: Weight discrepancy noted \u2014 recorded weight at collection differs from lab measurement.."
+  },
+  {
+    "id": "Q_TAMP_14",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E103?",
+    "expected_entities": [
+      "E103"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-014 details: Anti-static bag seal appears to have been opened and resealed. Hash verification pending.."
+  },
+  {
+    "id": "Q_TAMP_15",
+    "category": "tamper_investigation",
+    "question": "Were there any tamper incidents reported for evidence E180?",
+    "expected_entities": [
+      "E180"
+    ],
+    "expected_sources": [
+      "TamperIncident"
+    ],
+    "ground_truth": "Tamper incident TI-015 details: Temperature spike recorded in biological storage freezer unit.."
+  },
+  {
+    "id": "Q_ALT_1",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E002?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-001: TAMPER ALERT: Evidence E002 (Kitchen knife) has been flagged for possible tampering. Immediate review required.."
+  },
+  {
+    "id": "Q_ALT_2",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E003?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-002: HASH MISMATCH: Evidence E003 (Laptop) SHA-256 hash does not match stored value. Evidence may have been altered.."
+  },
+  {
+    "id": "Q_ALT_3",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E005?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-003: TAMPER ALERT: Evidence E005 (Heroin sample) weight discrepancy detected. 8g unaccounted for.."
+  },
+  {
+    "id": "Q_ALT_4",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E001?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-004: EXPIRY WARNING: Evidence E001 (Blood sample) expires soon. Immediate action required.."
+  },
+  {
+    "id": "Q_ALT_5",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E007?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-005: OVERDUE: Evidence E007 (DNA swab) examination has been pending for 28 days with no report filed.."
+  },
+  {
+    "id": "Q_ALT_6",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E113?",
+    "expected_entities": [
+      "E113"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-006: ESCALATION ALERT: Event recorded for evidence E113.."
+  },
+  {
+    "id": "Q_ALT_7",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E039?",
+    "expected_entities": [
+      "E039"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-007: EXPIRY ALERT: Event recorded for evidence E039.."
+  },
+  {
+    "id": "Q_ALT_8",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E109?",
+    "expected_entities": [
+      "E109"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-008: ESCALATION ALERT: Event recorded for evidence E109.."
+  },
+  {
+    "id": "Q_ALT_9",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E013?",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-009: HASHMISMATCH ALERT: Event recorded for evidence E013.."
+  },
+  {
+    "id": "Q_ALT_10",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E207?",
+    "expected_entities": [
+      "E207"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-010: HASHMISMATCH ALERT: Event recorded for evidence E207.."
+  },
+  {
+    "id": "Q_ALT_11",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E195?",
+    "expected_entities": [
+      "E195"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-011: TAMPER ALERT: Event recorded for evidence E195.."
+  },
+  {
+    "id": "Q_ALT_12",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E038?",
+    "expected_entities": [
+      "E038"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-012: TAMPER ALERT: Event recorded for evidence E038.."
+  },
+  {
+    "id": "Q_ALT_13",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E050?",
+    "expected_entities": [
+      "E050"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-013: HASHMISMATCH ALERT: Event recorded for evidence E050.."
+  },
+  {
+    "id": "Q_ALT_14",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E164?",
+    "expected_entities": [
+      "E164"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-014: HASHMISMATCH ALERT: Event recorded for evidence E164.."
+  },
+  {
+    "id": "Q_ALT_15",
+    "category": "alert_investigation",
+    "question": "What alerts exist for evidence E089?",
+    "expected_entities": [
+      "E089"
+    ],
+    "expected_sources": [
+      "AlertLog"
+    ],
+    "ground_truth": "Alert AL-015: OVERDUE ALERT: Event recorded for evidence E089.."
+  },
+  {
+    "id": "Q_CS_1",
+    "category": "case_summary",
+    "question": "Summarize case FIR/2024/PUN/001.",
+    "expected_entities": [
+      "FIR/2024/PUN/001"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case FIR/2024/PUN/001."
+  },
+  {
+    "id": "Q_CS_2",
+    "category": "case_summary",
+    "question": "Summarize case FIR/2024/MUM/002.",
+    "expected_entities": [
+      "FIR/2024/MUM/002"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case FIR/2024/MUM/002."
+  },
+  {
+    "id": "Q_CS_3",
+    "category": "case_summary",
+    "question": "Summarize case FIR/2024/PUN/003.",
+    "expected_entities": [
+      "FIR/2024/PUN/003"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case FIR/2024/PUN/003."
+  },
+  {
+    "id": "Q_CS_4",
+    "category": "case_summary",
+    "question": "Summarize case FIR/2023/MUM/004.",
+    "expected_entities": [
+      "FIR/2023/MUM/004"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case FIR/2023/MUM/004."
+  },
+  {
+    "id": "Q_CS_5",
+    "category": "case_summary",
+    "question": "Summarize case FIR/2024/PUN/005.",
+    "expected_entities": [
+      "FIR/2024/PUN/005"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case FIR/2024/PUN/005."
+  },
+  {
+    "id": "Q_CS_6",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2022/ST006/0006.",
+    "expected_entities": [
+      "SYN/2022/ST006/0006"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2022/ST006/0006."
+  },
+  {
+    "id": "Q_CS_7",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2026/ST004/0007.",
+    "expected_entities": [
+      "SYN/2026/ST004/0007"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2026/ST004/0007."
+  },
+  {
+    "id": "Q_CS_8",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2026/ST007/0008.",
+    "expected_entities": [
+      "SYN/2026/ST007/0008"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2026/ST007/0008."
+  },
+  {
+    "id": "Q_CS_9",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2023/ST005/0009.",
+    "expected_entities": [
+      "SYN/2023/ST005/0009"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2023/ST005/0009."
+  },
+  {
+    "id": "Q_CS_10",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2023/ST010/0010.",
+    "expected_entities": [
+      "SYN/2023/ST010/0010"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2023/ST010/0010."
+  },
+  {
+    "id": "Q_CS_11",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2024/ST004/0011.",
+    "expected_entities": [
+      "SYN/2024/ST004/0011"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2024/ST004/0011."
+  },
+  {
+    "id": "Q_CS_12",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2023/ST004/0012.",
+    "expected_entities": [
+      "SYN/2023/ST004/0012"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2023/ST004/0012."
+  },
+  {
+    "id": "Q_CS_13",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2022/ST003/0013.",
+    "expected_entities": [
+      "SYN/2022/ST003/0013"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2022/ST003/0013."
+  },
+  {
+    "id": "Q_CS_14",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2022/ST004/0014.",
+    "expected_entities": [
+      "SYN/2022/ST004/0014"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2022/ST004/0014."
+  },
+  {
+    "id": "Q_CS_15",
+    "category": "case_summary",
+    "question": "Summarize case SYN/2024/ST003/0015.",
+    "expected_entities": [
+      "SYN/2024/ST003/0015"
+    ],
+    "expected_sources": [
+      "CriminalCase",
+      "Evidence"
+    ],
+    "ground_truth": "Summary for case SYN/2024/ST003/0015."
+  },
+  {
+    "id": "Q_STOR_1",
+    "category": "storage_history",
+    "question": "Where is evidence E001 currently located?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E001."
+  },
+  {
+    "id": "Q_STOR_2",
+    "category": "storage_history",
+    "question": "Where is evidence E002 currently located?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E002."
+  },
+  {
+    "id": "Q_STOR_3",
+    "category": "storage_history",
+    "question": "Where is evidence E003 currently located?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E003."
+  },
+  {
+    "id": "Q_STOR_4",
+    "category": "storage_history",
+    "question": "Where is evidence E004 currently located?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E004."
+  },
+  {
+    "id": "Q_STOR_5",
+    "category": "storage_history",
+    "question": "Where is evidence E005 currently located?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E005."
+  },
+  {
+    "id": "Q_STOR_6",
+    "category": "storage_history",
+    "question": "Where is evidence E006 currently located?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E006."
+  },
+  {
+    "id": "Q_STOR_7",
+    "category": "storage_history",
+    "question": "Where is evidence E007 currently located?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E007."
+  },
+  {
+    "id": "Q_STOR_8",
+    "category": "storage_history",
+    "question": "Where is evidence E008 currently located?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E008."
+  },
+  {
+    "id": "Q_STOR_9",
+    "category": "storage_history",
+    "question": "Where is evidence E009 currently located?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E009."
+  },
+  {
+    "id": "Q_STOR_10",
+    "category": "storage_history",
+    "question": "Where is evidence E010 currently located?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "StorageLog",
+      "StorageUnit"
+    ],
+    "ground_truth": "Storage location for E010."
+  },
+  {
+    "id": "Q_CRT_1",
+    "category": "court_history",
+    "question": "Has evidence E001 been submitted to court?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E001."
+  },
+  {
+    "id": "Q_CRT_2",
+    "category": "court_history",
+    "question": "Has evidence E002 been submitted to court?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E002."
+  },
+  {
+    "id": "Q_CRT_3",
+    "category": "court_history",
+    "question": "Has evidence E003 been submitted to court?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E003."
+  },
+  {
+    "id": "Q_CRT_4",
+    "category": "court_history",
+    "question": "Has evidence E004 been submitted to court?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E004."
+  },
+  {
+    "id": "Q_CRT_5",
+    "category": "court_history",
+    "question": "Has evidence E005 been submitted to court?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E005."
+  },
+  {
+    "id": "Q_CRT_6",
+    "category": "court_history",
+    "question": "Has evidence E006 been submitted to court?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E006."
+  },
+  {
+    "id": "Q_CRT_7",
+    "category": "court_history",
+    "question": "Has evidence E007 been submitted to court?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E007."
+  },
+  {
+    "id": "Q_CRT_8",
+    "category": "court_history",
+    "question": "Has evidence E008 been submitted to court?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E008."
+  },
+  {
+    "id": "Q_CRT_9",
+    "category": "court_history",
+    "question": "Has evidence E009 been submitted to court?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E009."
+  },
+  {
+    "id": "Q_CRT_10",
+    "category": "court_history",
+    "question": "Has evidence E010 been submitted to court?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "CourtSubmission",
+      "Hearing"
+    ],
+    "ground_truth": "Court submission status for E010."
+  },
+  {
+    "id": "Q_ANOM_0",
+    "category": "anomaly_queries",
+    "question": "Which evidence has custody delays greater than 2 hours?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_1",
+    "category": "anomaly_queries",
+    "question": "Which biological samples are approaching expiry?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_2",
+    "category": "anomaly_queries",
+    "question": "Which forensic examinations are overdue?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_3",
+    "category": "anomaly_queries",
+    "question": "Which evidence items have unhandled hash mismatches?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_4",
+    "category": "anomaly_queries",
+    "question": "Show all evidence items inactive for more than 30 days.",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_5",
+    "category": "anomaly_queries",
+    "question": "Which evidence has custody delays greater than 2 hours?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_6",
+    "category": "anomaly_queries",
+    "question": "Which biological samples are approaching expiry?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_7",
+    "category": "anomaly_queries",
+    "question": "Which forensic examinations are overdue?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_8",
+    "category": "anomaly_queries",
+    "question": "Which evidence items have unhandled hash mismatches?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_9",
+    "category": "anomaly_queries",
+    "question": "Show all evidence items inactive for more than 30 days.",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_10",
+    "category": "anomaly_queries",
+    "question": "Which evidence has custody delays greater than 2 hours?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_11",
+    "category": "anomaly_queries",
+    "question": "Which biological samples are approaching expiry?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_12",
+    "category": "anomaly_queries",
+    "question": "Which forensic examinations are overdue?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_13",
+    "category": "anomaly_queries",
+    "question": "Which evidence items have unhandled hash mismatches?",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_ANOM_14",
+    "category": "anomaly_queries",
+    "question": "Show all evidence items inactive for more than 30 days.",
+    "expected_entities": [],
+    "expected_sources": [
+      "TemporalAnomalyView",
+      "OverdueExaminationView"
+    ],
+    "ground_truth": "Anomalies retrieved from database."
+  },
+  {
+    "id": "Q_HYB_1",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E001.",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E001."
+  },
+  {
+    "id": "Q_HYB_2",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E002.",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E002."
+  },
+  {
+    "id": "Q_HYB_3",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E003.",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E003."
+  },
+  {
+    "id": "Q_HYB_4",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E004.",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E004."
+  },
+  {
+    "id": "Q_HYB_5",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E005.",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E005."
+  },
+  {
+    "id": "Q_HYB_6",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E006.",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E006."
+  },
+  {
+    "id": "Q_HYB_7",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E007.",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E007."
+  },
+  {
+    "id": "Q_HYB_8",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E008.",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E008."
+  },
+  {
+    "id": "Q_HYB_9",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E009.",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E009."
+  },
+  {
+    "id": "Q_HYB_10",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E010.",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E010."
+  },
+  {
+    "id": "Q_HYB_11",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E011.",
+    "expected_entities": [
+      "E011"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E011."
+  },
+  {
+    "id": "Q_HYB_12",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E012.",
+    "expected_entities": [
+      "E012"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E012."
+  },
+  {
+    "id": "Q_HYB_13",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E013.",
+    "expected_entities": [
+      "E013"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E013."
+  },
+  {
+    "id": "Q_HYB_14",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E014.",
+    "expected_entities": [
+      "E014"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E014."
+  },
+  {
+    "id": "Q_HYB_15",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E015.",
+    "expected_entities": [
+      "E015"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E015."
+  },
+  {
+    "id": "Q_HYB_16",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E016.",
+    "expected_entities": [
+      "E016"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E016."
+  },
+  {
+    "id": "Q_HYB_17",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E017.",
+    "expected_entities": [
+      "E017"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E017."
+  },
+  {
+    "id": "Q_HYB_18",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E018.",
+    "expected_entities": [
+      "E018"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E018."
+  },
+  {
+    "id": "Q_HYB_19",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E019.",
+    "expected_entities": [
+      "E019"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E019."
+  },
+  {
+    "id": "Q_HYB_20",
+    "category": "cross_table_hybrid",
+    "question": "Show the complete chain of custody and lab examination summary for E020.",
+    "expected_entities": [
+      "E020"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "CustodyLog",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Cross-table summary for E020."
+  },
+  {
+    "id": "Q_UNSUP_1",
+    "category": "unsupported_queries",
+    "question": "Give me the history of evidence E9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_2",
+    "category": "unsupported_queries",
+    "question": "Who examined non-existent report ER-9999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_3",
+    "category": "unsupported_queries",
+    "question": "Show custody log for officer MH-9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_4",
+    "category": "unsupported_queries",
+    "question": "What was the verdict for case FIR/9999/MUM/999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_5",
+    "category": "unsupported_queries",
+    "question": "Which satellite tracked evidence E001?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_6",
+    "category": "unsupported_queries",
+    "question": "Give me the history of evidence E9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_7",
+    "category": "unsupported_queries",
+    "question": "Who examined non-existent report ER-9999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_8",
+    "category": "unsupported_queries",
+    "question": "Show custody log for officer MH-9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_9",
+    "category": "unsupported_queries",
+    "question": "What was the verdict for case FIR/9999/MUM/999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_10",
+    "category": "unsupported_queries",
+    "question": "Which satellite tracked evidence E001?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_11",
+    "category": "unsupported_queries",
+    "question": "Give me the history of evidence E9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_12",
+    "category": "unsupported_queries",
+    "question": "Who examined non-existent report ER-9999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_13",
+    "category": "unsupported_queries",
+    "question": "Show custody log for officer MH-9999.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_14",
+    "category": "unsupported_queries",
+    "question": "What was the verdict for case FIR/9999/MUM/999?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_UNSUP_15",
+    "category": "unsupported_queries",
+    "question": "Which satellite tracked evidence E001?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "The available verified records and forensic reports do not contain sufficient information to answer this question."
+  },
+  {
+    "id": "Q_AMB_1",
+    "category": "ambiguous_queries",
+    "question": "Tell me about the evidence.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_2",
+    "category": "ambiguous_queries",
+    "question": "What happened to the knife?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_3",
+    "category": "ambiguous_queries",
+    "question": "Show me the report.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_4",
+    "category": "ambiguous_queries",
+    "question": "Is it compromised?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_5",
+    "category": "ambiguous_queries",
+    "question": "Who handled it?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_6",
+    "category": "ambiguous_queries",
+    "question": "Tell me about the evidence.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_7",
+    "category": "ambiguous_queries",
+    "question": "What happened to the knife?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_8",
+    "category": "ambiguous_queries",
+    "question": "Show me the report.",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_9",
+    "category": "ambiguous_queries",
+    "question": "Is it compromised?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_AMB_10",
+    "category": "ambiguous_queries",
+    "question": "Who handled it?",
+    "expected_entities": [],
+    "expected_sources": [],
+    "ground_truth": "Ambiguous query context."
+  },
+  {
+    "id": "Q_RBAC_1",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_2",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_3",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_4",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_5",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_6",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_7",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_8",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_9",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_RBAC_10",
+    "category": "rbac_security",
+    "question": "Show all system audit log entries for evidence updates.",
+    "expected_entities": [],
+    "expected_sources": [
+      "AuditLog"
+    ],
+    "ground_truth": "Audit log entries restricted by RBAC role."
+  },
+  {
+    "id": "Q_FOL_1",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_2",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_3",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_4",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_5",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_6",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_7",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_8",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_9",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_FOL_10",
+    "category": "follow_up_queries",
+    "question": "Who examined it after collection?",
+    "expected_entities": [],
+    "expected_sources": [
+      "Examination"
+    ],
+    "ground_truth": "Conversational context resolution."
+  },
+  {
+    "id": "Q_CONF_1",
+    "category": "conflicting_information",
+    "question": "Is evidence E001 currently intact and admissible?",
+    "expected_entities": [
+      "E001"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E001."
+  },
+  {
+    "id": "Q_CONF_2",
+    "category": "conflicting_information",
+    "question": "Is evidence E002 currently intact and admissible?",
+    "expected_entities": [
+      "E002"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E002."
+  },
+  {
+    "id": "Q_CONF_3",
+    "category": "conflicting_information",
+    "question": "Is evidence E003 currently intact and admissible?",
+    "expected_entities": [
+      "E003"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E003."
+  },
+  {
+    "id": "Q_CONF_4",
+    "category": "conflicting_information",
+    "question": "Is evidence E004 currently intact and admissible?",
+    "expected_entities": [
+      "E004"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E004."
+  },
+  {
+    "id": "Q_CONF_5",
+    "category": "conflicting_information",
+    "question": "Is evidence E005 currently intact and admissible?",
+    "expected_entities": [
+      "E005"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E005."
+  },
+  {
+    "id": "Q_CONF_6",
+    "category": "conflicting_information",
+    "question": "Is evidence E006 currently intact and admissible?",
+    "expected_entities": [
+      "E006"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E006."
+  },
+  {
+    "id": "Q_CONF_7",
+    "category": "conflicting_information",
+    "question": "Is evidence E007 currently intact and admissible?",
+    "expected_entities": [
+      "E007"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E007."
+  },
+  {
+    "id": "Q_CONF_8",
+    "category": "conflicting_information",
+    "question": "Is evidence E008 currently intact and admissible?",
+    "expected_entities": [
+      "E008"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E008."
+  },
+  {
+    "id": "Q_CONF_9",
+    "category": "conflicting_information",
+    "question": "Is evidence E009 currently intact and admissible?",
+    "expected_entities": [
+      "E009"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E009."
+  },
+  {
+    "id": "Q_CONF_10",
+    "category": "conflicting_information",
+    "question": "Is evidence E010 currently intact and admissible?",
+    "expected_entities": [
+      "E010"
+    ],
+    "expected_sources": [
+      "Evidence",
+      "ExaminationReport"
+    ],
+    "ground_truth": "Conflict check for E010."
+  }
+]

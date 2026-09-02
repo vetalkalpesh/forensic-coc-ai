@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — Forensic CoC</title>
+<link rel="stylesheet" href="static/css/style.css"></head>
+<body>
+<div id="app" style="display:flex;width:100%">
+<div class="main">
+    <div class="topbar">
+        <div><div class="topbar-title">Dashboard</div><div class="topbar-sub">FORENSIC EVIDENCE CHAIN OF CUSTODY SYSTEM</div></div>
+        <div class="topbar-right"><span class="mono" id="clock" style="color:var(--text3);font-size:12px"></span></div>
+    </div>
+    <div class="content">
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card info"><div class="stat-icon">📁</div><div class="stat-label">Total Cases</div><div class="stat-value" id="s1">—</div></div>
+            <div class="stat-card warning"><div class="stat-icon">🔍</div><div class="stat-label">Active Cases</div><div class="stat-value" id="s2">—</div></div>
+            <div class="stat-card info"><div class="stat-icon">🔬</div><div class="stat-label">Total Evidence</div><div class="stat-value" id="s3">—</div></div>
+            <div class="stat-card info"><div class="stat-icon">🧪</div><div class="stat-label">In Lab</div><div class="stat-value" id="s4">—</div></div>
+            <div class="stat-card warning"><div class="stat-icon">⚖</div><div class="stat-label">In Court</div><div class="stat-value" id="s5">—</div></div>
+            <div class="stat-card danger"><div class="stat-icon">🚨</div><div class="stat-label">Compromised</div><div class="stat-value" id="s6">—</div></div>
+            <div class="stat-card danger"><div class="stat-icon">🔔</div><div class="stat-label">Open Alerts</div><div class="stat-value" id="s7">—</div></div>
+            <div class="stat-card danger"><div class="stat-icon">⏰</div><div class="stat-label">Expiring Soon</div><div class="stat-value" id="s8">—</div></div>
+            <div class="stat-card warning"><div class="stat-icon">📋</div><div class="stat-label">Overdue Reports</div><div class="stat-value" id="s9">—</div></div>
+            <div class="stat-card danger"><div class="stat-icon">⚠</div><div class="stat-label">Tamper Open</div><div class="stat-value" id="s10">—</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div class="card">
+                <div class="flex-between mb-16">
+                    <div class="card-title" style="margin:0;border:none;padding:0">Recent Cases</div>
+                    <a href="cases.html" class="btn btn-outline btn-sm">View All</a>
+                </div>
+                <div class="table-wrap"><table><thead><tr><th>FIR No</th><th>Type</th><th>Status</th><th>Officer</th></tr></thead>
+                <tbody id="recentCases"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody></table></div>
+            </div>
+            <div class="card">
+                <div class="flex-between mb-16">
+                    <div class="card-title" style="margin:0;border:none;padding:0">Recent Alerts</div>
+                    <a href="alerts.html" class="btn btn-outline btn-sm">View All</a>
+                </div>
+                <div id="recentAlerts"><div class="loading">Loading...</div></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Advanced Features</div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <button class="btn btn-outline" onclick="runDMS()">💀 Run Dead Man Switch</button>
+                <a href="custody.html" class="btn btn-outline">🕐 Temporal Anomalies</a>
+                <a href="evidence.html" class="btn btn-outline">🔑 Hash Verification</a>
+                <a href="evidence.html" class="btn btn-outline">🌐 Evidence Dependency</a>
+            </div>
+            <div id="dmsResult"></div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="static/js/app.js"></script>
+<script>
+setInterval(()=>{ document.getElementById('clock').textContent=new Date().toLocaleString('en-IN'); },1000);
+async function load(){
+    const d=await get('/dashboard');
+    const s=d.stats;
+    [s.total_cases,s.active_cases,s.total_evidence,s.in_lab,s.in_court,
+     s.compromised,s.open_alerts,s.expiring_soon,s.overdue_reports,s.open_tamper]
+    .forEach((v,i)=>document.getElementById('s'+(i+1)).textContent=v);
+    document.getElementById('recentCases').innerHTML=d.recent_cases.map(c=>`
+        <tr><td><span class="mono">${c.fir_number}</span></td><td>${c.type_name}</td>
+        <td>${statusBadge(c.status)}</td><td>${c.officer}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">No cases</td></tr>';
+    document.getElementById('recentAlerts').innerHTML=d.recent_alerts.map(a=>`
+        <div class="alert-box ${a.is_acknowledged?'info':'danger'}" style="margin-bottom:8px;font-size:12px">
+            <div><strong>${a.alert_type}</strong>${a.evidence_desc?' — '+a.evidence_desc:''}
+            <div style="margin-top:4px;opacity:.8">${(a.message||'').substring(0,90)}...</div>
+            <div style="margin-top:4px;font-family:var(--mono);font-size:10px">${fmtDT(a.generated_at)}</div></div>
+        </div>`).join('')||'<div class="empty">No alerts</div>';
+}
+async function runDMS(){
+    const r=await post('/dead-man-switch',{});
+    document.getElementById('dmsResult').innerHTML=`<div class="alert-box success" style="margin-top:12px">✓ ${r.message||'Dead Man Switch executed'}</div>`;
+    toast(r.message||'Dead Man Switch done','success');
+    loadAlertCount();
+}
+load();
+</script>
+</body></html>

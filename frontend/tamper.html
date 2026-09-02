@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Tamper — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar"><div><div class="topbar-title">Tamper & Integrity</div><div class="topbar-sub">EVIDENCE INTEGRITY INCIDENTS</div></div>
+<div class="topbar-right"><button class="btn btn-danger req-senior" onclick="openModal('tmModal')">⚠ Report Tamper</button></div></div>
+<div class="content">
+    <div class="card"><div class="card-title">Open Incidents (Auto-sorted by Severity)</div><div id="unresolvedDiv"><div class="loading">Loading...</div></div></div>
+    <div class="card"><div class="card-title">All Incidents</div>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>Evidence</th><th>FIR</th><th>Severity</th><th>Description</th><th>Reported By</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody id="tmBody"><tr><td colspan="9" class="loading">Loading...</td></tr></tbody></table></div></div>
+</div></div></div>
+
+<div class="modal-overlay" id="tmModal"><div class="modal">
+    <div class="modal-header"><span class="modal-title">Report Tamper Incident</span><button class="modal-close" onclick="closeModal('tmModal')">×</button></div>
+    <div class="modal-body">
+        <div class="alert-box danger">This will automatically mark evidence as COMPROMISED and trigger the cascade trigger on all derived evidence.</div>
+        <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Select Evidence Item *</label><select class="form-control" id="tmEv"></select></div>
+            <div class="form-group"><label class="form-label">Severity *</label>
+                <select class="form-control" id="tmSev"><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option><option value="Critical">Critical</option></select>
+            </div>
+        </div>
+        <div class="form-group"><label class="form-label">Description *</label><textarea class="form-control" id="tmDesc" rows="4" placeholder="Describe the tamper incident in detail..."></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('tmModal')">Cancel</button><button class="btn btn-danger" onclick="doReport()">Report Incident</button></div>
+</div></div>
+
+<script src="static/js/app.js"></script>
+<script>
+async function load(){
+    const [unresolved,all,officers,evList]=await Promise.all([get('/views/unresolved-tamper'),get('/tamper'),get('/lookup/officers'),get('/evidence')]);
+    if (Array.isArray(evList)) {
+        populateSelect('tmEv', evList.map(e => ({id: e.evidence_id, text: `E${String(e.evidence_id).padStart(3,'0')} — ${e.description}`})), 'id', 'text', 'Select Evidence...');
+    }
+    document.getElementById('unresolvedDiv').innerHTML=unresolved.length?`
+        <div class="table-wrap"><table><thead><tr><th>Evidence</th><th>FIR</th><th>Severity</th><th>Days Open</th><th>Status</th></tr></thead>
+        <tbody>${unresolved.map(r=>`<tr>
+            <td>E${String(r.evidence_id).padStart(3,'0')} ${r.evidence_description}</td>
+            <td><span class="mono">${r.fir_number}</span></td>
+            <td>${statusBadge(r.severity)}</td>
+            <td><span class="mono" style="color:var(--redl)">${r.days_unresolved} days</span></td>
+            <td>${statusBadge(r.resolution_status)}</td>
+        </tr>`).join('')}</tbody></table></div>`:'<div class="empty">No unresolved incidents 🎉</div>';
+    document.getElementById('tmBody').innerHTML=all.map(t=>`<tr>
+        <td><span class="mono">#${t.incident_id}</span></td>
+        <td>E${String(t.evidence_id).padStart(3,'0')} ${t.evidence}</td>
+        <td><span class="mono" style="font-size:11px">${t.fir_number}</span></td>
+        <td>${statusBadge(t.severity)}</td>
+        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.incident_desc}">${t.incident_desc}</td>
+        <td>${t.reported_by}</td><td>${fmtDT(t.reported_datetime)}</td>
+        <td>${statusBadge(t.resolution_status)}</td>
+        <td>${t.resolution_status!=='Resolved'?`<button class="btn btn-success btn-sm req-senior" onclick="resolve(${t.incident_id})">Resolve</button>`:'—'}</td>
+    </tr>`).join('')||'<tr><td colspan="9" class="empty">No incidents</td></tr>';
+    
+}
+async function doReport(){
+    const r=await post('/tamper',{evidence_id:document.getElementById('tmEv').value,description:document.getElementById('tmDesc').value,severity:document.getElementById('tmSev').value});
+    if(r.success){closeModal('tmModal');toast('Incident reported. Evidence marked COMPROMISED.','success');load();loadAlertCount();}
+    else toast(r.error,'danger');
+}
+async function resolve(id){
+    await post(`/tamper/${id}/resolve`,{});
+    toast('Incident resolved','success');load();
+}
+load();
+</script></body></html>

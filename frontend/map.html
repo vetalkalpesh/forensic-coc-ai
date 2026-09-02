@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Forensic Map — Forensic CoC</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <style>
+        #map { height: calc(100vh - 120px); border-radius: var(--r); border: 1px solid var(--border); background: var(--bg3); z-index: 1; }
+        .map-layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; height: calc(100vh - 100px); }
+        .map-sidebar { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); display: flex; flex-direction: column; overflow: hidden; }
+        .map-sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); background: var(--bg3); }
+        .trail-list { flex: 1; overflow-y: auto; padding: 12px; }
+        .trail-step { padding: 10px; border-radius: var(--r); border: 1px solid transparent; margin-bottom: 8px; cursor: pointer; transition: all .2s; }
+        .trail-step:hover { background: var(--bg3); border-color: var(--blue2); }
+        .trail-step.active { background: var(--bg3); border-color: var(--accent); }
+        .trail-step .step-title { font-size: 13px; font-weight: 600; color: var(--text); }
+        .trail-step .step-meta { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 4px; }
+        
+        /* Custom Marker Colors */
+        .marker-pin { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; background: #c30b0b; position: absolute; transform: rotate(-45deg); left: 50%; top: 50%; margin: -15px 0 0 -15px; }
+        .marker-pin::after { content: ''; width: 24px; height: 24px; margin: 3px 0 0 3px; background: #fff; position: absolute; border-radius: 50%; }
+        
+        .leaflet-popup-content-wrapper { background: var(--bg2); color: var(--text); border: 1px solid var(--border); }
+        .leaflet-popup-tip { background: var(--bg2); border: 1px solid var(--border); }
+        .leaflet-container { font-family: var(--sans) !important; }
+    </style>
+</head>
+<body>
+<div id="app" style="display:flex;width:100%">
+    <div class="main">
+        <div class="topbar">
+            <div>
+                <div class="topbar-title">Forensic Map Dashboard</div>
+                <div class="topbar-sub">INTERACTIVE GEOSPATIAL EVIDENCE TRACKING</div>
+            </div>
+            <div class="topbar-right">
+                <span class="mono" id="clock" style="color:var(--text3);font-size:12px"></span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="map-layout">
+                <div id="map"></div>
+                <div class="map-sidebar">
+                    <div class="map-sidebar-header">
+                        <div class="form-label">Track Evidence Trail</div>
+                        <select id="evidenceSelect" class="form-control" onchange="loadEvidenceTrail(this.value)">
+                            <option value="">Select Evidence...</option>
+                        </select>
+                    </div>
+                    <div class="trail-list" id="trailList">
+                        <div class="empty">Select an evidence item to visualize its movement trail on the map.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="static/js/app.js"></script>
+<script src="static/js/map.js"></script>
+<script>
+    setInterval(()=>{ document.getElementById('clock').textContent=new Date().toLocaleString('en-IN'); },1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Storage — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar"><div><div class="topbar-title">Storage Management</div><div class="topbar-sub">EVIDENCE STORAGE LOCATIONS & CAPACITY</div></div></div>
+<div class="content">
+    <div id="unitsGrid" class="stats-grid"></div>
+    <div class="card"><div class="card-title">Currently Stored Evidence</div>
+    <div class="table-wrap"><table><thead><tr><th>Evidence</th><th>Storage Unit</th><th>Facility</th><th>Stored On</th><th>Days Stored</th><th>Stored By</th></tr></thead>
+    <tbody id="itemsBody"><tr><td colspan="6" class="loading">Loading...</td></tr></tbody></table></div></div>
+    <div class="card"><div class="card-title">⏰ Evidence Expiring Within 7 Days</div><div id="expiringDiv"><div class="loading">Loading...</div></div></div>
+</div></div></div>
+<script src="static/js/app.js"></script>
+<script>
+async function load(){
+    const [data,exp]=await Promise.all([get('/storage'),get('/views/expiring-evidence')]);
+    document.getElementById('unitsGrid').innerHTML=data.units.map(u=>`
+        <div class="stat-card ${u.available<5?'danger':'info'}">
+            <div class="stat-icon">🏛</div>
+            <div class="stat-label">${u.unit_code}</div>
+            <div class="stat-value">${u.current_count}<span style="font-size:14px;color:var(--text3)">/${u.capacity}</span></div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">${u.facility_name}</div>
+            <div style="font-size:10px;color:var(--text3)">${u.unit_type}</div>
+        </div>`).join('');
+    document.getElementById('itemsBody').innerHTML=data.current_items.map(i=>`<tr>
+        <td><span class="mono">E${String(i.evidence_id).padStart(3,'0')}</span> ${i.description}</td>
+        <td><span class="badge badge-gray">${i.unit_code}</span></td>
+        <td>${i.facility_name}</td><td>${fmtDT(i.stored_on)}</td>
+        <td><span class="mono">${i.days_stored} days</span></td><td>${i.stored_by}</td>
+    </tr>`).join('')||'<tr><td colspan="6" class="empty">No items in storage</td></tr>';
+    document.getElementById('expiringDiv').innerHTML=exp.length?`
+        <div class="table-wrap"><table><thead><tr><th>Evidence</th><th>Expiry Date</th><th>Days Left</th><th>Storage Unit</th><th>Facility</th><th>FIR</th></tr></thead>
+        <tbody>${exp.map(e=>`<tr>
+            <td>E${String(e.evidence_id).padStart(3,'0')} ${e.description}</td>
+            <td><span class="mono" style="color:var(--redl)">${fmtDate(e.expiry_date)}</span></td>
+            <td><span class="badge badge-red">${e.days_remaining} days</span></td>
+            <td>${e.unit_code}</td><td>${e.facility_name}</td>
+            <td><span class="mono" style="font-size:11px">${e.fir_number}</span></td>
+        </tr>`).join('')}</tbody></table></div>`:'<div class="empty">No evidence expiring soon 🎉</div>';
+}
+load();
+</script></body></html>

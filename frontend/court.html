@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Court — Forensic CoC</title><link rel="stylesheet" href="static/css/style.css"></head>
+<body><div id="app" style="display:flex;width:100%"><div class="main">
+<div class="topbar"><div><div class="topbar-title">Court Submissions</div><div class="topbar-sub">EVIDENCE SUBMITTED TO COURT</div></div>
+<div class="topbar-right"><button class="btn btn-primary req-senior" onclick="openModal('submitModal')">+ Submit to Court</button></div></div>
+<div class="content">
+    <div class="card"><div class="card-title">Evidence Currently In Court</div><div id="inCourtDiv"><div class="loading">Loading...</div></div></div>
+    <div class="card"><div class="card-title">All Hearings</div>
+    <div class="table-wrap"><table><thead><tr><th>ID</th><th>FIR</th><th>Date</th><th>Purpose</th><th>Judge</th><th>Court</th><th>Outcome</th><th>Evidence</th></tr></thead>
+    <tbody id="hearingBody"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table></div></div>
+</div></div></div>
+
+<div class="modal-overlay" id="submitModal"><div class="modal">
+    <div class="modal-header"><span class="modal-title">Submit Evidence to Court</span><button class="modal-close" onclick="closeModal('submitModal')">×</button></div>
+    <div class="modal-body">
+        <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Select Evidence Item *</label><select class="form-control" id="subEv"></select></div>
+            <div class="form-group"><label class="form-label">Select Case *</label><select class="form-control" id="subCase"></select></div>
+        </div>
+        <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Hearing *</label><select class="form-control" id="subHearing"></select></div>
+            <div class="form-group"><label class="form-label">Submitted By Officer *</label><select class="form-control" id="subOfficer"></select></div>
+        </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('submitModal')">Cancel</button><button class="btn btn-primary" onclick="doSubmit()">Submit</button></div>
+</div></div>
+
+<script src="static/js/app.js"></script>
+<script>
+async function load(){
+    const [inCourt,hearings,officers,evList,cases]=await Promise.all([get('/views/evidence-in-court'),get('/hearings'),get('/lookup/officers'),get('/evidence'),get('/lookup/cases-list')]);
+    document.getElementById('inCourtDiv').innerHTML=inCourt.length?`
+        <div class="table-wrap"><table><thead><tr><th>Evidence</th><th>FIR</th><th>Submitted By</th><th>Date</th><th>Days In Court</th><th>Judge</th></tr></thead>
+        <tbody>${inCourt.map(i=>`<tr>
+            <td>E${String(i.evidence_id).padStart(3,'0')} ${i.description}</td>
+            <td><span class="mono">${i.fir_number}</span></td>
+            <td>${i.submitted_by}</td><td>${fmtDate(i.submission_date)}</td>
+            <td><span class="badge badge-orange">${i.days_in_court} days</span></td>
+            <td>${i.judge}</td>
+        </tr>`).join('')}</tbody></table></div>`:'<div class="empty">No evidence currently in court</div>';
+    document.getElementById('hearingBody').innerHTML=hearings.map(h=>`<tr>
+        <td><span class="mono">#${h.hearing_id}</span></td>
+        <td><span class="mono">${h.fir_number}</span></td>
+        <td>${fmtDate(h.hearing_date)}</td><td>${h.hearing_purpose}</td>
+        <td>${h.judge}</td><td>${h.court_name}</td>
+        <td>${h.outcome?`<span style="color:var(--greenl)">${h.outcome}</span>`:'<span class="badge badge-gray">Pending</span>'}</td>
+        <td><span class="badge badge-gray">${h.evidence_count}</span></td>
+    </tr>`).join('')||'<tr><td colspan="8" class="empty">No hearings</td></tr>';
+    populateSelect('subHearing',hearings,'hearing_id','hearing_purpose');
+    populateSelect('subOfficer',officers,'officer_id','full_name');
+    populateSelect('subCase',cases,'case_id','fir_number');
+    if (Array.isArray(evList)) {
+        populateSelect('subEv', evList.map(e => ({id: e.evidence_id, text: `E${String(e.evidence_id).padStart(3,'0')} — ${e.description}`})), 'id', 'text');
+    }
+}
+async function doSubmit(){
+    const r=await post('/court/submit',{evidence_id:document.getElementById('subEv').value,case_id:document.getElementById('subCase').value,hearing_id:document.getElementById('subHearing').value,submitted_by:document.getElementById('subOfficer').value});
+    if(r.success){closeModal('submitModal');toast('Evidence submitted to court!','success');load();}
+    else toast(r.error||'Error','danger');
+}
+load();
+</script></body></html>

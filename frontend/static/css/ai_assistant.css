@@ -1,0 +1,226 @@
+/* Forensic AI Assistant Stylesheet — Extends main style.css */
+
+.ai-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    gap: 16px;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Chat Main Area */
+.chat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg3);
+}
+
+.chat-header-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-method-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--text2);
+}
+
+.chat-method-selector select {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: var(--mono);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.chat-bubble {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: var(--r);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.chat-bubble.user {
+    align-self: flex-end;
+    background: var(--blue2);
+    color: #fff;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-bubble.ai {
+    align-self: flex-start;
+    background: var(--bg3);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 2px;
+    width: 100%;
+}
+
+.ai-answer-content {
+    white-space: pre-wrap;
+    margin-bottom: 12px;
+}
+
+/* Conflict Warning Banner */
+.conflict-banner {
+    background: #3d2e1b;
+    border: 1px solid var(--orange);
+    color: var(--orangel);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* Source Chips */
+.sources-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+}
+
+.source-label {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text3);
+    text-transform: uppercase;
+}
+
+.source-chip {
+    background: var(--bg2);
+    border: 1px solid var(--blue2);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-family: var(--mono);
+    cursor: pointer;
+    transition: all .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.source-chip:hover {
+    background: var(--blue2);
+    color: #fff;
+}
+
+.btn-why {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-family: var(--mono);
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.btn-why:hover {
+    border-color: var(--accent);
+    background: var(--bg3);
+}
+
+/* Chat Input Bar */
+.chat-input-bar {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    background: var(--bg2);
+}
+
+.chat-input-bar input {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: var(--r);
+    font-size: 13px;
+    font-family: var(--sans);
+    outline: none;
+}
+
+.chat-input-bar input:focus {
+    border-color: var(--blue2);
+}
+
+/* Suggested Queries Sidebar Card */
+.suggested-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.suggested-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .15s;
+    line-height: 1.4;
+}
+
+.suggested-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg2);
+}
